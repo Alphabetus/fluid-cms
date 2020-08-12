@@ -11,5 +11,11 @@
     "add": "^2.0.6",
     "sass-loader": "^8.0.0",
     "yarn": "^1.22.4"
-  }
+  },
+  "name": "fluid-cms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Alphabetus/fluid-cms.git",
+  "author": "jeri-entwickler <jijjjan@gmail.com>",
+  "license": "MIT"
 }

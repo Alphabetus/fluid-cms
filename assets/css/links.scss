@@ -1,0 +1,8 @@
+.menu a {
+  color: black;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: lighten(black, 25%);
+}

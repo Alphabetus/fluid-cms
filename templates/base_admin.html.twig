@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
-
+{% block navigation %}
+    {% include "shared/admin_menu.html.twig" %}
+{% endblock %}
 
 {% block body %}
-    Im on fucking admin template
+    {% include "admin/sidebar.html.twig" %}
+    <div class="admin__wrapper container-fluid mt-3">
+        content
+    </div>
+    <div class="clearfix"></div>
 {% endblock %}

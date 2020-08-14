@@ -5,3 +5,13 @@
     margin-top: 1em;
   }
 }
+
+.menu a {
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  color: $primary;
+}

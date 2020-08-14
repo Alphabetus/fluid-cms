@@ -1,0 +1,37 @@
+<div id="sidebar" class="admin__sidebar bg-light pt-3">
+    <div class="container-fluid menu">
+
+        <div class="admin__link-container">
+            <a href="#" data-toggle="collapse" data-target="#pagesLink" role="button">Pages</a>
+
+            <div id="pagesLink" class="collapse border-bottom pb-2" data-parent="#sidebar">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
+                        &nbsp;<a href="#">New Page</a>
+                    </div>
+                    <div class="col-12">
+                        <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
+                        &nbsp;<a href="#">View Pages</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="admin__link-container">
+            <a href="#" data-toggle="collapse" data-target="#settingsLink" role="button">Settings</a>
+
+            <div id="settingsLink" class="collapse border-bottom pb-2" data-parent="#sidebar">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
+                        &nbsp;<a href="#">Global Settings</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

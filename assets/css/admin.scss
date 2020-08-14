@@ -1,0 +1,18 @@
+
+.admin__ {
+
+  &nav {
+    height: 8vh;
+  }
+
+  &wrapper {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  &sidebar {
+    float: left;
+    width: 250px;
+    min-height: 92vh;
+  }
+}

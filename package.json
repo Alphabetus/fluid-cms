@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "add": "^2.0.6",
+    "copy-webpack-plugin": "^6.0.3",
     "sass-loader": "^8.0.0",
     "yarn": "^1.22.4"
   },

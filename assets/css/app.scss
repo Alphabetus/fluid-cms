@@ -1,8 +1,20 @@
 @import '~bootstrap';
+@import 'bootstrap-overrides';
 @import 'links';
 @import 'icons';
 @import 'admin';
+@import 'forms';
+@import 'flashes';
 
 body {
     background-color: lightgray;
+}
+
+img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

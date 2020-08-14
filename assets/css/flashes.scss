@@ -1,0 +1,18 @@
+
+.custom-alert {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 65%;
+  padding-right: 25px;
+  transform: translateX(-50%);
+  z-index: 10000;
+
+  .alert-close {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}

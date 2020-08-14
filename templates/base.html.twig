@@ -7,11 +7,17 @@
         {% block stylesheets %}{% endblock %}
         {{ encore_entry_link_tags('app') }}
         {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('alerts') }}
     </head>
     <body>
         {% block navigation %}
             {# Todo -> create nav element from bootstrap #}
             {% include "shared/blogfront_menu.html.twig" %}
+        {% endblock %}
+
+        {% block flashes %}
+            {% include "shared/flashes/success.html.twig" %}
+            {% include "shared/flashes/error.html.twig" %}
         {% endblock %}
 
         {% block body %}{% endblock %}

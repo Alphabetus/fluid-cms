@@ -1,0 +1,85 @@
+{% extends "base_admin.html.twig" %}
+
+{% block admin_body %}
+
+    <div class="container-fluid p-0">
+        <div class="row justify-content-between">
+            <div class="col-6 align-self-center-center">
+                <h1>Create Page</h1>
+            </div>
+            <div class="col-6 align-self-center text-right">
+                <a href="{{ path("admin.pages.list") }}" class="btn btn-sm btn-outline-primary">View Pages</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    {{ form_start(form) }}
+        <div class="row justify-content-center">
+
+            <div class="col-12">
+                {{ form_label(form.title, "Page Title") }}
+                {{ form_widget(form.title, {
+                        "attr": {
+                            "class" : "form-control",
+                            "placeholder": "Type a page title"
+                        }
+                    }) }}
+            </div>
+
+            <div class="col-12 mt-2">
+                {{ form_label(form.description, "Page Description") }}
+                {{ form_widget(form.description, {
+                    "attr": {
+                        "class" : "form-control",
+                        "placeholder" : "Enter a page description",
+                    }
+                }) }}
+            </div>
+
+            <div class="col-12 mt-2 pl-0">
+                <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch">
+                        {{ form_widget(form.in_navigation, {
+                            "attr" : {
+                                "class" : "custom-control-input"
+                            }
+                        }) }}
+
+                        {{ form_label(form.in_navigation, "Page In Navigation Manu", {
+                            "label_attr" : {
+                                "class" : "custom-control-label"
+                            }
+                        }) }}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 pl-0">
+                <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch">
+                        {{ form_widget(form.active, {
+                            "attr" : {
+                                "class" : "custom-control-input"
+                            }
+                        }) }}
+
+                        {{ form_label(form.active, "Page Active", {
+                            "label_attr" : {
+                                "class" : "custom-control-label"
+                            }
+                        }) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-1">
+                <hr>
+                <button type="submit" class="btn btn-block btn-primary">Create Page</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

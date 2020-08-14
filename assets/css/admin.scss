@@ -1,17 +1,22 @@
 
 .admin__ {
 
+  &container {
+    white-space: nowrap;
+  }
+
   &nav {
     height: 8vh;
   }
 
   &wrapper {
-    max-width: 1000px;
+    display: inline-block;
+    max-width: 850px;
     margin: auto;
   }
 
   &sidebar {
-    float: left;
+    display: inline-block;
     width: 250px;
     min-height: 92vh;
   }

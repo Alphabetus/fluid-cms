@@ -7,7 +7,8 @@
 {% block body %}
     {% include "admin/sidebar.html.twig" %}
     <div class="admin__wrapper container-fluid mt-3">
-        content
+        {% block admin_body %}
+        {% endblock %}
     </div>
     <div class="clearfix"></div>
 {% endblock %}

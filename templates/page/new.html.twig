@@ -11,6 +11,7 @@
         <div class="row justify-content-center">
 
             <div class="col-12">
+                {{ form_label(form.title, "Page Title") }}
                 {{ form_widget(form.title, {
                         "attr": {
                             "class" : "form-control",
@@ -20,10 +21,11 @@
             </div>
 
             <div class="col-12 mt-2">
+                {{ form_label(form.description, "Page Description") }}
                 {{ form_widget(form.description, {
                     "attr": {
                         "class" : "form-control",
-                        "placeholder" : "enter a page description",
+                        "placeholder" : "Enter a page description",
                     }
                 }) }}
             </div>

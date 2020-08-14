@@ -1,0 +1,10 @@
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success custom-alert shadow">
+        <div class="wrapper p-relative">
+            <div class="alert-close" onclick="javascript:closeCustomAlert.call(this)">
+                &times;
+            </div>
+            {{ message }}
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,10 @@
+{% for message in app.flashes('error') %}
+    <div class="alert alert-warning custom-alert shadow">
+        <div class="wrapper p-relative">
+            <div class="alert-close" onclick="javascript:closeCustomAlert.call(this)">
+                &times;
+            </div>
+            {{ message }}
+        </div>
+    </div>
+{% endfor %}

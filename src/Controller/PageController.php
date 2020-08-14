@@ -31,16 +31,18 @@ class PageController extends AbstractController
             $errors = $validator->validate($page);
 
             if (count($errors) > 0) {
+                // we have errors
                 $errorString = (string) $errors;
                 $this->addFlash("error", $errorString);
                 return $this->redirectToRoute("admin.pages.new");
             } else {
+                // we do not have errors
                 $page = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($page);
                 $em->flush();
                 $this->addFlash('success', "Your page was created successfully");
-                return $this->redirectToRoute("admin");
+                return $this->redirectToRoute("admin.pages.list");
             }
         }
 
@@ -55,6 +57,9 @@ class PageController extends AbstractController
      */
     public function list(): Response
     {
-        return $this->render("page/list.html.twig");
+        $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
+        return $this->render("page/list.html.twig", [
+            "pages" => $pages
+        ]);
     }
 }

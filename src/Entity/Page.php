@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -108,5 +109,15 @@ class Page
         $this->priority_list = $priority_list;
 
         return $this;
+    }
+
+    public function getActiveString(): string
+    {
+        return $this->getActive() ? "true" : "false";
+    }
+
+    public function getInNavigationString(): string
+    {
+        return $this->getInNavigation() ? "true" : "false";
     }
 }

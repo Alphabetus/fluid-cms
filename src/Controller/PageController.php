@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Page;
 use App\Form\NewPageFormType;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,6 +64,19 @@ class PageController extends AbstractController
         $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
         return $this->render("page/list.html.twig", [
             "pages" => $pages
+        ]);
+    }
+
+    /**
+     * @param $puid
+     * @return Response
+     * @Route("/admin/pages/edit/{puid}/", name="admin.page.edit")
+     */
+    public function edit($puid): Response
+    {
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
+        return $this->render("page/edit.html.twig", [
+            "page" => $page
         ]);
     }
 }

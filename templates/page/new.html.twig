@@ -37,6 +37,16 @@
                 }) }}
             </div>
 
+            <div class="col-12 mt-2">
+                {{ form_label(form.slug, "Url Path") }}
+                {{ form_widget(form.slug, {
+                    "attr": {
+                        "class" : "form-control",
+                        "placeholder": "Select the url for this page"
+                    }
+                }) }}
+            </div>
+
             <div class="col-12 mt-2 pl-0">
                 <div class="custom-control custom-switch">
                     <div class="custom-control custom-switch">

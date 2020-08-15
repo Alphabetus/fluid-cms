@@ -46,6 +46,11 @@ class Page
      */
     private $priority_list;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,5 +124,17 @@ class Page
     public function getInNavigationString(): string
     {
         return $this->getInNavigation() ? "true" : "false";
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

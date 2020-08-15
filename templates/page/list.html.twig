@@ -16,12 +16,13 @@
 
     <div class="container-fluid p-0">
 
-        <table class="table table-hover">
+        <table class="table table-hover admin__page-list">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Url Path</th>
                     <th scope="col" class="text-center">Published</th>
                     <th scope="col" class="text-center">In Menu</th>
                     <th scope="col" class="text-center">Actions</th>
@@ -35,6 +36,7 @@
                         <th scope="row">{{ page.id }}</th>
                         <td>{{ page.title }}</td>
                         <td class="text-truncate">{{ page.description }}</td>
+                        <td class="text-truncate">{{ page.slug }}</td>
                         <td class="text-center">{% if page.active %}<img src="{{ asset("build/images/icons/green_ball.png") }}" alt="page active" class="icon-md"/>{% else %}<img src="{{ asset("build/images/icons/red_ball.png") }}" alt="page active" class="icon-md"/>{% endif %}</td>
                         <td class="text-center">{% if page.inNavigation %}<img src="{{ asset("build/images/icons/green_ball.png") }}" alt="page active" class="icon-md"/>{% else %}<img src="{{ asset("build/images/icons/red_ball.png") }}" alt="page active" class="icon-md"/>{% endif %}</td>
                         <td class="text-center">[edit]</td>

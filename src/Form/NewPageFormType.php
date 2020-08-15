@@ -14,6 +14,7 @@ class NewPageFormType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
+            ->add('slug')
             ->add('in_navigation')
             ->add('active')
         ;

@@ -13,6 +13,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Page
 {
     /**
+     * STATIC METHODS
+     */
+    public static function cleanSlug(String $slug): string
+    {
+        $slug = preg_replace('/[^A-Za-z0-9\-]/', '-', $slug);
+        /*$slug = str_replace(" ", "-", $slug);*/
+        return $slug;
+    }
+    /**
+     * END OF STATIC METHODS
+     */
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -50,6 +63,11 @@ class Page
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $puid;
 
     public function getId(): ?int
     {
@@ -134,6 +152,18 @@ class Page
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPuid(): ?string
+    {
+        return $this->puid;
+    }
+
+    public function setPuid(string $puid): self
+    {
+        $this->puid = $puid;
 
         return $this;
     }

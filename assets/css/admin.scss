@@ -10,14 +10,14 @@
   }
 
   &wrapper {
-    display: inline-block;
     max-width: 850px;
-    margin: auto;
+    /*margin: auto;*/
+    margin-left: 200px;
   }
 
   &sidebar {
-    display: inline-block;
-    width: 250px;
+    float: left;
+    width: 200px;
     min-height: 92vh;
   }
 }

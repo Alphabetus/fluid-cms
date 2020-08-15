@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Page;
+use App\Form\EditPageFormType;
 use App\Form\NewPageFormType;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
@@ -79,7 +80,10 @@ class PageController extends AbstractController
             $this->addFlash('error', "Page not found!");
             return $this->redirectToRoute("admin.pages.list");
         }
+
+        $form = $this->createForm(EditPageFormType::class, $page);
         return $this->render("page/edit.html.twig", [
+            "form" => $form->createView(),
             "page" => $page
         ]);
     }

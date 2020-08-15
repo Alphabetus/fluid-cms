@@ -1,0 +1,23 @@
+{% extends "base_admin.html.twig" %}
+
+{% block admin_body %}
+
+    <div class="container-fluid p-0">
+        <div class="row justify-content-between">
+            <div class="col-12 align-self-center-center">
+                <h2>Page Details <small>[{{ page.title }}]</small></h2>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="container-fluid p-0">
+        {% include "page/components/edit_form.html.twig" %}
+    </div>
+
+    <hr>
+    <div class="container-fluid p-0">
+        {% include "page/components/edit_page_content.html.twig" %}
+    </div>
+
+{% endblock %}

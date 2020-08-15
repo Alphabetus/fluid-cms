@@ -1,0 +1,75 @@
+{{ form_start(form) }}
+<div class="row justify-content-center">
+
+    <div class="col-12">
+        {{ form_label(form.title, "Page Title") }}
+        {{ form_widget(form.title, {
+            "attr": {
+                "class" : "form-control",
+                "placeholder": "Type a page title"
+            }
+        }) }}
+    </div>
+
+    <div class="col-12 mt-2">
+        {{ form_label(form.description, "Page Description") }}
+        {{ form_widget(form.description, {
+            "attr": {
+                "class" : "form-control",
+                "placeholder" : "Enter a page description",
+            }
+        }) }}
+    </div>
+
+    <div class="col-12 mt-2">
+        {{ form_label(form.slug, "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>", {"label_html" : true}) }}
+        {{ form_widget(form.slug, {
+            "attr": {
+                "class" : "form-control",
+                "placeholder": "Select the url for this page"
+            }
+        }) }}
+    </div>
+
+    <div class="col-12 mt-2 pl-0">
+        <div class="custom-control custom-switch">
+            <div class="custom-control custom-switch">
+                {{ form_widget(form.in_navigation, {
+                    "attr" : {
+                        "class" : "custom-control-input"
+                    }
+                }) }}
+
+                {{ form_label(form.in_navigation, "Page In Navigation Manu", {
+                    "label_attr" : {
+                        "class" : "custom-control-label"
+                    }
+                }) }}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 pl-0">
+        <div class="custom-control custom-switch">
+            <div class="custom-control custom-switch">
+                {{ form_widget(form.active, {
+                    "attr" : {
+                        "class" : "custom-control-input"
+                    }
+                }) }}
+
+                {{ form_label(form.active, "Page Active", {
+                    "label_attr" : {
+                        "class" : "custom-control-label"
+                    }
+                }) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mt-5">
+        <button type="submit" class="btn btn-block btn-primary">Update Details</button>
+    </div>
+</div>
+{{ form_end(form) }}

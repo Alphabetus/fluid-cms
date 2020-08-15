@@ -8,6 +8,7 @@ $primary: #109e92;
 @import 'flashes';
 @import 'menus';
 @import 'tables';
+@import 'effects';
 
 body {
     background-color: lightgray;
@@ -21,3 +22,4 @@ img {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+

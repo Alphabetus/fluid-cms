@@ -5,12 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="admin__container">
-        {% include "admin/sidebar.html.twig" %}
-        <div class="admin__wrapper container-fluid mt-3">
-            {% block admin_body %}
-            {% endblock %}
-        </div>
+    {% include "admin/sidebar.html.twig" %}
+    <div class="admin__wrapper container-fluid mt-3">
+        {% block admin_body %}
+        {% endblock %}
     </div>
     <div class="clearfix"></div>
 {% endblock %}

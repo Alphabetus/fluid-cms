@@ -8,3 +8,14 @@ window.closeCustomAlert = function() {
         $parent.remove();
     })
 }
+
+
+window.closeCustomAlertAuto = function() {
+    const $alert = $('.custom-alert');
+
+    $alert.animate({
+        opacity: 0
+    }, 350, function(){
+        $alert.remove();
+    })
+}

@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-12 mt-2">
-                {{ form_label(form.slug, "Url Path") }}
+                {{ form_label(form.slug, "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>", {"label_html" : true}) }}
                 {{ form_widget(form.slug, {
                     "attr": {
                         "class" : "form-control",

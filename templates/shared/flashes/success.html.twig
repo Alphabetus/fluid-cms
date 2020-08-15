@@ -1,13 +1,15 @@
-{% for message in app.flashes('success') %}
+{% if app.session.flashbag.peek('success')|length > 0 %}
     <div class="alert alert-success custom-alert shadow">
         <div class="wrapper p-relative">
             <div class="alert-close" onclick="javascript:closeCustomAlert.call(this)">
                 &times;
             </div>
-            {{ message }}
+            {% for message in app.flashes("success") %}
+                {{ message }}<br>
+            {% endfor %}
         </div>
     </div>
-{% endfor %}
+{% endif %}
 
 <script type="text/javascript">
     setTimeout(function () {

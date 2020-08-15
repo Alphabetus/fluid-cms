@@ -75,6 +75,10 @@ class PageController extends AbstractController
     public function edit($puid): Response
     {
         $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
+        if (!$page) {
+            $this->addFlash('error', "Page not found!");
+            return $this->redirectToRoute("admin.pages.list");
+        }
         return $this->render("page/edit.html.twig", [
             "page" => $page
         ]);

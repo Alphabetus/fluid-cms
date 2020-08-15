@@ -4,11 +4,20 @@ namespace App\Entity;
 
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PageRepository::class)
+ * @UniqueEntity(
+ *     fields={"slug"},
+ *     message="This url path {{ value }} is already being used."
+ * )
+ * @UniqueEntity(
+ *     fields={"title"},
+ *     message="{{ value }} is already being used as page title"
+ * )
  */
 class Page
 {

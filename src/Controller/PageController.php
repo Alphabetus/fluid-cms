@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PageController extends AbstractController
@@ -38,6 +39,8 @@ class PageController extends AbstractController
             } else {
                 // we do not have errors
                 $page = $form->getData();
+                $page->setPuid(Uuid::v1());
+                $page->setSlug($page::cleanSlug($page->getSlug()));
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($page);
                 $em->flush();

@@ -70,10 +70,12 @@ class PageController extends AbstractController
 
     /**
      * @param $puid
+     * @param Request $request
+     * @param ValidatorInterface $validator
      * @return Response
      * @Route("/admin/pages/edit/{puid}/", name="admin.page.edit")
      */
-    public function edit($puid): Response
+    public function edit($puid, Request $request, ValidatorInterface $validator): Response
     {
         $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
         if (!$page) {
@@ -82,6 +84,24 @@ class PageController extends AbstractController
         }
 
         $form = $this->createForm(EditPageFormType::class, $page);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $page = $form->getData();
+            $errors = $validator->validate($page);
+            if (count($errors) > 0) {
+                $error_string = (string) $errors;
+                $this->addFlash("error", $error_string);
+                return $this->redirectToRoute('admin.page.edit', ['puid' => $page->getPuid()]);
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash('success', 'Page details edited');
+                return $this->redirectToRoute('admin.page.edit', ['puid' => $page->getPuid()]);
+            }
+        }
+
         return $this->render("page/edit.html.twig", [
             "form" => $form->createView(),
             "page" => $page

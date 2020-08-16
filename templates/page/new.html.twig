@@ -1,7 +1,6 @@
 {% extends "base_admin.html.twig" %}
 
 {% block admin_body %}
-
     <div class="container-fluid p-0">
         <div class="row justify-content-between">
             <div class="col-6 align-self-center-center">
@@ -31,7 +30,7 @@
                 {{ form_label(form.description, "Page Description") }}
                 {{ form_widget(form.description, {
                     "attr": {
-                        "class" : "form-control",
+                        "class" : "form-control tinymce",
                         "placeholder" : "Enter a page description",
                     }
                 }) }}

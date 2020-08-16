@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+
+    {{ tinymce_init() }}
+
     {% include "admin/sidebar.html.twig" %}
     <div class="admin__wrapper container-fluid mt-3">
         {% block admin_body %}

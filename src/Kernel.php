@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

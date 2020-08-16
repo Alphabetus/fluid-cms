@@ -33,7 +33,7 @@
                 {% for page in pages %}
                     <tr>
                         <td class="text-truncate t-200">{{ page.title }}</td>
-                        <td class="text-truncate t-350">{{ page.description }}</td>
+                        <td class="text-truncate t-350">{{ page.description|striptags }}</td>
                         <td class="text-truncate t-350">{{ page.slug }}</td>
                         <td class="text-center">{% if page.active %}<img src="{{ asset("build/images/icons/green_ball.png") }}" alt="page active" class="icon-md"/>{% else %}<img src="{{ asset("build/images/icons/red_ball.png") }}" alt="page active" class="icon-md"/>{% endif %}</td>
                         <td class="text-center">{% if page.inNavigation %}<img src="{{ asset("build/images/icons/green_ball.png") }}" alt="page active" class="icon-md"/>{% else %}<img src="{{ asset("build/images/icons/red_ball.png") }}" alt="page active" class="icon-md"/>{% endif %}</td>

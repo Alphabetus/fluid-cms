@@ -47,6 +47,7 @@ class PageController extends AbstractController
                 $em->persist($page);
                 $em->flush();
                 $this->addFlash('success', "Your page was created successfully");
+                // todo create log entry
                 return $this->redirectToRoute("admin.pages.list");
             }
         }

@@ -1,0 +1,11 @@
+app:
+
+  # backend block
+  backend:
+    # Menu block
+    menu:
+      new_page: "New Page"
+      list_page: "View Pages"
+
+    # Pages Block
+    pages:

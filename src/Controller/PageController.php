@@ -7,8 +7,6 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Form\EditPageFormType;
 use App\Form\NewPageFormType;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +20,10 @@ class PageController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return Response
-     * @Route("/admin/pages/new", name="admin.pages.new")
+     * @Route("{_locale}/admin/pages/new",
+     *     name="admin.pages.new",
+     *     defaults={"_locale"="en"}
+     * )
      */
     public function new(Request $request, ValidatorInterface $validator): Response
     {
@@ -59,7 +60,10 @@ class PageController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/admin/pages/list", name="admin.pages.list")
+     * @Route("{_locale}/admin/pages/list",
+     *     name="admin.pages.list",
+     *     defaults={"_locale"="en"}
+     * )
      */
     public function list(): Response
     {
@@ -74,7 +78,10 @@ class PageController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return Response
-     * @Route("/admin/pages/edit/{puid}/", name="admin.page.edit")
+     * @Route("{_locale}/admin/pages/edit/{puid}/",
+     *     name="admin.page.edit",
+     *     defaults={"_locale"="en"}
+     * )
      */
     public function edit($puid, Request $request, ValidatorInterface $validator): Response
     {

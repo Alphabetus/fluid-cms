@@ -1,0 +1,4 @@
+app:
+  backend:
+    menu:
+      new_page: "Neue Seite"

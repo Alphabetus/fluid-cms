@@ -19,6 +19,8 @@
 
         </div>
 
+
+
         <div class="admin__link-container menu__link">
             <a href="#" data-toggle="collapse" data-target="#settingsLink" role="button" class="link"><img src="{{ asset("build/images/icons/settings.png") }}" class="icon-bg" alt="settings icon">&nbsp;Settings</a>
 
@@ -26,7 +28,7 @@
                 <div class="row">
                     <div class="col-12 pl-4">
                         <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
-                        &nbsp;<a href="#">Global Settings</a>
+                        &nbsp;<a href="{{ path("admin.settings") }}">Global Settings</a>
                     </div>
                 </div>
             </div>

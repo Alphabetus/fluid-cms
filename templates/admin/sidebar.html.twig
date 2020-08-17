@@ -2,17 +2,17 @@
     <div class="container-fluid menu">
 
         <div class="admin__link-container menu__link">
-            <a href="#" data-toggle="collapse" data-target="#pagesLink" role="button"><img src="{{ asset("build/images/icons/pages.png") }}" class="icon-bg" alt="settings icon">&nbsp;Pages</a>
+            <a href="#" data-toggle="collapse" data-target="#pagesLink" role="button"><img src="{{ asset("build/images/icons/pages.png") }}" class="icon-bg" alt="settings icon">&nbsp;{{ "app.backend.menus.sidebar.titles.pages"|trans }}</a>
 
             <div id="pagesLink" class="collapse border-bottom py-2" data-parent="#sidebar">
                 <div class="row">
                     <div class="col-12 pl-4">
                         <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
-                        &nbsp;<a href="{{ path("admin.pages.new") }}">{{ "app.backend.menu.new_page"|trans }}</a>
+                        &nbsp;<a href="{{ path("admin.pages.new") }}">{{ "app.backend.menus.sidebar.items.newpage"|trans }}</a>
                     </div>
                     <div class="col-12 pl-4">
                         <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
-                        &nbsp;<a href="{{ path("admin.pages.list") }}">{{ "app.backend.menu.list_page"|trans }}</a>
+                        &nbsp;<a href="{{ path("admin.pages.list") }}">{{ "app.backend.menus.sidebar.items.viewpages"|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-12 pl-4">
                         <img src="{{ asset("build/images/icons/bullet.png") }}" alt="menu icon" class="icon">
-                        &nbsp;<a href="{{ path("admin.settings") }}">Global Settings</a>
+                        &nbsp;<a href="{{ path("admin.settings") }}">{{ "app.backend.menus.sidebar.items.globalsettings"|trans }}</a>
                     </div>
                 </div>
             </div>

@@ -2,31 +2,31 @@
 <div class="row justify-content-center">
 
     <div class="col-12">
-        {{ form_label(form.title, "Page Title") }}
+        {{ form_label(form.title, "app.backend.forms.edit_page_metadetails.labels.pagetitle"|trans) }}
         {{ form_widget(form.title, {
             "attr": {
                 "class" : "form-control",
-                "placeholder": "Type a page title"
+                "placeholder": "app.backend.forms.edit_page_metadetails.placeholders.pagetitle"|trans
             }
         }) }}
     </div>
 
     <div class="col-12 mt-2">
-        {{ form_label(form.description, "Page Description") }}
+        {{ form_label(form.description, "app.backend.forms.edit_page_metadetails.labels.pagedescription"|trans) }}
         {{ form_widget(form.description, {
             "attr": {
                 "class" : "form-control tinymce",
-                "placeholder" : "Enter a page description",
+                "placeholder" : "app.backend.forms.edit_page_metadetails.placeholders.pagedescription"|trans
             }
         }) }}
     </div>
 
     <div class="col-12 mt-2">
-        {{ form_label(form.slug, "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>", {"label_html" : true}) }}
+        {{ form_label(form.slug, "app.backend.forms.edit_page_metadetails.labels.urlpath"|trans, {"label_html" : true}) }}
         {{ form_widget(form.slug, {
             "attr": {
                 "class" : "form-control",
-                "placeholder": "Select the url for this page"
+                "placeholder": "app.backend.forms.edit_page_metadetails.placeholders.urlpath"|trans
             }
         }) }}
     </div>
@@ -40,7 +40,7 @@
                     }
                 }) }}
 
-                {{ form_label(form.in_navigation, "Page In Navigation Manu", {
+                {{ form_label(form.in_navigation, "app.backend.forms.edit_page_metadetails.checkboxes.pageinNavmenu"|trans, {
                     "label_attr" : {
                         "class" : "custom-control-label"
                     }
@@ -59,7 +59,7 @@
                     }
                 }) }}
 
-                {{ form_label(form.active, "Page Active", {
+                {{ form_label(form.active, "app.backend.forms.edit_page_metadetails.checkboxes.pageactive"|trans, {
                     "label_attr" : {
                         "class" : "custom-control-label"
                     }
@@ -69,7 +69,7 @@
     </div>
 
     <div class="col-12 mt-5">
-        <button type="submit" class="btn btn-block btn-primary">Update Details</button>
+        <button type="submit" class="btn btn-block btn-primary">{{ "app.backend.forms.edit_page_metadetails.form-buttons.submit_updatedetails"|trans }}</button>
     </div>
 </div>
 {{ form_end(form) }}

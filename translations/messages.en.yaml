@@ -2,10 +2,69 @@ app:
 
   # backend block
   backend:
-    # Menu block
-    menu:
-      new_page: "New Page"
-      list_page: "View Pages"
+    # Menu block which contains the sidebar navigation
+    menus:
+      sidebar:
+        titles:
+          pages: "Pages"
+          settings: "Settings"
+        items:
+          newpage: "New Page"
+          viewpages: "View Pages"
+          globalsettings: "Global Settings"
+      topbar:
+        language: "language"
 
-    # Pages Block
-    pages:
+    # headers are outside menu
+    headers:
+      globalsettings: "Global Settings"
+      createpage: "Create Page"
+      existentpages: "Existent Pages"
+      pagedetails: "Page Details"
+      editpagecontent: "Edit Page Content"
+
+    # Buttons without form
+    buttons:
+      view_pages: "View Pages"
+      create_page: "Create Page"
+
+    # Forms area
+    forms:
+      new_page_creation:
+        labels:
+          pagetitle: "Page Title"
+          pagedescription: "Page Description"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Type a page title"
+          pagedescription: "Enter a page description"
+          urlpath: "Select the url for this page"
+        checkboxes:
+          pageinNavmenu: "Page in Navigation Menu"
+          pageactive: "Pages Active"
+        form-buttons:
+          submit_createpage: "Create Page"
+
+      edit_page_metadetails:
+        labels:
+          pagetitle: "Page Title"
+          pagedescription: "Page Description"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Type a page title"
+          pagedescription: "Enter a page description"
+          urlpath: "Select the url for this page"
+        checkboxes:
+          pageinNavmenu: "Page in Navigation Menu"
+          pageactive: "Page Active"
+        form-buttons:
+          submit_updatedetails: "Update Details"
+
+
+      edit_page_contents:
+        form-buttons:
+          add-newblock: "Add New Block"
+
+
+
+

@@ -13,11 +13,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function hq(TranslatorInterface $translator)
+    public function hq()
     {
-        return $this->render("base_admin.html.twig", [
-            "translator" => $translator
-        ]);
+        return $this->render("base_admin.html.twig");
     }
 
     /**

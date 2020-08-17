@@ -4,8 +4,18 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li></li>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ "app.backend.menus.topbar.language"|trans }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-right: 200px;">
+                    {% for locale in locales.getLocales %}
+                        <a class="dropdown-item" href="/{{ locale.locale }}/admin/"><img src="{{ locale.image }}" alt="lang image" class="icon-md">&nbsp;&nbsp;{{ locale.locale }}</a>
+                    {% endfor %}
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
+

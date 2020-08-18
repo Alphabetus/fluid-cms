@@ -6,7 +6,10 @@
 
 <div class="row mb-3">
     <div class="col-12">
-        <button id="addBlocksButton" type="button" class="btn btn-outline-primary btn-block dropdown-toggle" data-toggle="dropdown">{{ "app.backend.forms.edit_page_contents.form-buttons.add-newblock"|trans }}</button>
+        <button id="addBlocksButton" type="button" class="btn btn-primary btn-block dropdown-toggle shadow" data-toggle="dropdown">
+            <img src="{{ asset("build/images/icons/add.png") }}" class="icon-xl vertical-bottom" alt=""/>
+            {{ "app.backend.forms.edit_page_contents.form-buttons.add-newblock"|trans }}
+        </button>
 
         <div class="dropdown-menu" aria-labelledby="addBlocksButton">
             <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-page="{{ page.id }}" data-type="text" data-href="{{ path('blocks.new') }}" disabled="disabled">{{ "app.backend.forms.edit_page_contents.form-buttons.add-text-block"|trans }}</a>
@@ -23,9 +26,11 @@
             </div>
         </div>
     </div>
+    <img src="{{ "build/images/icons/add.png" }}" alt=""/>
     <div id="blocks" class="custom-shadow-inset border border-primary p-2 mb-5 row m-0">
     </div>
 </div>
+
 
 <script type="text/javascript">
     $(document).ready(function(){

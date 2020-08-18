@@ -8,7 +8,6 @@ use App\Entity\Block;
 use App\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
@@ -53,6 +52,59 @@ class BlockController extends AbstractController
         return new JsonResponse("ok", 200);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/blocks/resize/md", name="blocks.resize.md")
+     */
+    public function resizeBlockMd(Request $request): JsonResponse
+    {
+        $buid = $request->request->get('buid');
+        $desk_breakpoint = $request->request->get('breakpoint');
+        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $em = $this->getDoctrine()->getManager();
+        $block->setDesktopBreakpoint($desk_breakpoint);
+        $em->flush();
+        return new JsonResponse("ok", 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/blocks/resize/mobile", name="blocks.resize.mob")
+     */
+    public function resizeBlockMobile(Request $request): JsonResponse
+    {
+        $buid = $request->request->get('buid');
+        $mob_breakpoint = $request->request->get('breakpoint');
+        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $em = $this->getDoctrine()->getManager();
+        $block->setMobileBreakpoint($mob_breakpoint);
+        $em->flush();
+        return new JsonResponse("ok", 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/blocks/get", name="blocks.get")
+     */
+    public function populateBlocks(Request $request): JsonResponse
+    {
+        $puid = $request->request->get('puid');
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["puid" => $puid]);
+        $blocks = $page->getBlocks();
+        $serializer = $this->container->get("serializer");
+        $blocks = $serializer->serialize($blocks, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]);
+
+
+        return new JsonResponse($blocks);
+    }
+    
     protected function logger($content)
     {
         $file = "test.php";

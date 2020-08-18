@@ -81,7 +81,7 @@ class Page
     private $puid;
 
     /**
-     * @ORM\OneToMany(targetEntity=Block::class, mappedBy="page", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Block::class, mappedBy="page", orphanRemoval=true, fetch="EAGER")
      */
     private $blocks;
 

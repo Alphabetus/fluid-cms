@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div id="blocks__container" class="position-relative" data-delete="{{ path("blocks.delete") }}">
+<div id="blocks__container" class="position-relative" data-delete="{{ path("blocks.delete") }}" data-resizemd="{{ path("blocks.resize.md") }}" data-resizemob="{{ path("blocks.resize.mob") }}" data-puid="{{ page.puid }}">
     <div id="blocks__load">
         <div class="row h-100 text-center">
             <div class="col-12 align-self-center">
@@ -23,6 +23,20 @@
             </div>
         </div>
     </div>
-    <div id="blocks" class="custom-shadow-inset border border-primary p-3 mb-5">
+    <div id="blocks" class="custom-shadow-inset border border-primary p-3 mb-5 row m-0">
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $.ajax({
+            url: '/blocks/get',
+            type: 'POST',
+            data: {puid: "{{ page.puid }}"},
+            success: function(data) { window.block.populateData(data) },
+            error: function(data) { console.log(data) }
+        })
+
+    });
+</script>

@@ -28,6 +28,7 @@ class BlockController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $block->setPage($page);
         $block->setType($type);
+        $block->setPriority('0');
         $block->setMobileBreakpoint("col-12");
         $block->setDesktopBreakpoint("col-md-12");
         $block->setBuid(Uuid::v1());
@@ -120,6 +121,7 @@ class BlockController extends AbstractController
         foreach ($priorityArray as $index => $value) {
             $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $value]);
             $block->setPriority($index);
+            $this->logger($block->getBuid());
             $em->flush();
         }
 

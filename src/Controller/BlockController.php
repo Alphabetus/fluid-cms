@@ -121,7 +121,6 @@ class BlockController extends AbstractController
         foreach ($priorityArray as $index => $value) {
             $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $value]);
             $block->setPriority($index);
-            $this->logger($block->getBuid());
             $em->flush();
         }
 

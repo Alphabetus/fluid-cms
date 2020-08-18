@@ -9,14 +9,20 @@
         <button id="addBlocksButton" type="button" class="btn btn-outline-primary btn-block dropdown-toggle" data-toggle="dropdown">{{ "app.backend.forms.edit_page_contents.form-buttons.add-newblock"|trans }}</button>
 
         <div class="dropdown-menu" aria-labelledby="addBlocksButton">
-            <a class="dropdown-item" href="#" onclick="javascript:window.createBlock.call(this)" data-page="{{ page.id }}" data-type="text" data-href="{{ path('blocks.new') }}">{{ "app.backend.forms.edit_page_contents.form-buttons.add-text-block"|trans }}</a>
+            <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-page="{{ page.id }}" data-type="text" data-href="{{ path('blocks.new') }}" disabled="disabled">{{ "app.backend.forms.edit_page_contents.form-buttons.add-text-block"|trans }}</a>
             <a class="dropdown-item" href="#" data-type="image" data-href="{{ path('blocks.new') }}" data-page="{{ page.id }}">{{ "app.backend.forms.edit_page_contents.form-buttons.add-image-block"|trans }}</a>
         </div>
     </div>
 </div>
 
-<div id="blocks__container">
+<div id="blocks__container" class="position-relative" data-delete="{{ path("blocks.delete") }}">
+    <div id="blocks__load">
+        <div class="row h-100 text-center">
+            <div class="col-12 align-self-center">
+                <img src="{{ asset("build/images/icons/loading.gif") }}" alt="loading icon" class="icon-loading">
+            </div>
+        </div>
+    </div>
     <div id="blocks" class="custom-shadow-inset border border-primary p-3 mb-5">
-        blocks
     </div>
 </div>

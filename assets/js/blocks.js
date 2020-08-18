@@ -160,14 +160,55 @@ class Block {
         })
     }
 
+    getValueFromClass(classString) {
+        let output;
+        switch (classString) {
+            case "col-md-12":
+                output = 1;
+                break;
+            case "col-md-6":
+                output = 2;
+                break;
+            case "col-md-4":
+                output = 3;
+                break;
+            case "col-md-3":
+                output = 4;
+                break;
+            case "col-md-8":
+                output = 5;
+                break;
+            case "col-md-9":
+                output = 6;
+                break;
+        }
+        return output;
+    }
+
+    getValueFromClassMobile(classString) {
+        let output;
+        switch (classString) {
+            case "col-12":
+                output = 1;
+                break;
+            case "col-6":
+                output = 2;
+                break;
+        }
+        return output;
+    }
+
     populateData(data) {
         const parsedData = JSON.parse(data);
-        let $template = $(this.template);
         const $container = $('#blocks');
+
+        let $temp;
+        let $deskSelector;
+        let $mobSelector;
 
         for(var x = 0; x < parsedData.length; x++) {
             $container.append(`
-                    <div id="${ parsedData[x].buid }" class="col-12 block mt-2 shadow-sm" data-priority="0">
+                    <div id="${ parsedData[x].buid }" class="${ parsedData[x].desktopBreakpoint } block mt-2 shadow-sm" data-priority="0">
                         <div class="row h-100 mt-3">
                             <div class="close" onclick="javascript:window.block.deleteBlock.call(this)">
                                 &times;
@@ -205,7 +246,13 @@ class Block {
                             </div>
                         </div>
                     </div>
-            `)
+            `);
+
+            $temp = $('#' + parsedData[x].buid);
+            $deskSelector = $temp.find('[name="desktop-breakpoint"]');
+            $mobSelector = $temp.find('[name="mobile-breakpoint"]');
+            $deskSelector.val(window.block.getValueFromClass(parsedData[x].desktopBreakpoint));
+            $mobSelector.val(window.block.getValueFromClassMobile(parsedData[x].mobileBreakpoint));
         }
     }
 }
@@ -254,5 +301,30 @@ class Breakpoint {
     }
 }
 
+window.reassignPriority = function() {
+    const $container = $('#blocks__container');
+    const $blocks = $('.block').not('.gu-mirror');
+    const endpoint = $container.data('priority');
+    const priorityArray = [];
+
+
+    $.each($blocks, function(k, v) {
+        priorityArray.push($(v).attr('id'));
+    });
+
+    const payload = {
+        puid: $container.data('puid'),
+        blocks: priorityArray
+    }
+
+    $.ajax({
+        url: endpoint,
+        type: 'POST',
+        data: payload,
+        success: function(d) { console.log(d) },
+        error: function(d) { console.log(d) }
+    });
+
+}
 
 window.block = new Block();

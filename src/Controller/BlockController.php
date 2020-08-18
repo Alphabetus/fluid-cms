@@ -104,6 +104,27 @@ class BlockController extends AbstractController
 
         return new JsonResponse($blocks);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/blocks/priority", name="blocks.priority")
+     */
+    public function reassignPriority(Request $request): JsonResponse
+    {
+        $puid = $request->request->get('puid');
+        $priorityArray = $request->request->get('blocks');
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["puid" => $puid]);
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($priorityArray as $index => $value) {
+            $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $value]);
+            $block->setPriority($index);
+            $em->flush();
+        }
+
+        return new JsonResponse("ok", 200);
+    }
     
     protected function logger($content)
     {

@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div id="blocks__container" class="position-relative" data-delete="{{ path("blocks.delete") }}" data-resizemd="{{ path("blocks.resize.md") }}" data-resizemob="{{ path("blocks.resize.mob") }}" data-puid="{{ page.puid }}">
+<div id="blocks__container" class="position-relative" data-delete="{{ path("blocks.delete") }}" data-resizemd="{{ path("blocks.resize.md") }}" data-resizemob="{{ path("blocks.resize.mob") }}" data-priority="{{ path("blocks.priority") }}" data-puid="{{ page.puid }}">
     <div id="blocks__load">
         <div class="row h-100 text-center">
             <div class="col-12 align-self-center">
@@ -36,6 +36,12 @@
             data: {puid: "{{ page.puid }}"},
             success: function(data) { window.block.populateData(data) },
             error: function(data) { console.log(data) }
+        })
+
+        window.drake = dragula([document.getElementById("blocks")]);
+
+        window.drake.on('drop', function(el, target, source, sibling){
+            window.reassignPriority();
         })
 
     });

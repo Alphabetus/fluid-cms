@@ -14,6 +14,3 @@ import $ from 'jquery';
 import "bootstrap";
 import "jquery";
 import "popper.js";
-
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

@@ -27,6 +27,7 @@ app:
     buttons:
       view_pages: "View Pages"
       create_page: "Create Page"
+      add_block: "Add Block"
 
     # Forms area
     forms:
@@ -64,6 +65,8 @@ app:
       edit_page_contents:
         form-buttons:
           add-newblock: "Add New Block"
+          add-text-block: "Add Text Block"
+          add-image-block: "Add Image Block"
 
 
 

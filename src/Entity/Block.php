@@ -43,6 +43,11 @@ class Block
      */
     private $desktop_breakpoint;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $buid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Block
     public function setDesktopBreakpoint(string $desktop_breakpoint): self
     {
         $this->desktop_breakpoint = $desktop_breakpoint;
+
+        return $this;
+    }
+
+    public function getBuid(): ?string
+    {
+        return $this->buid;
+    }
+
+    public function setBuid(string $buid): self
+    {
+        $this->buid = $buid;
 
         return $this;
     }

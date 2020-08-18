@@ -82,6 +82,7 @@ class Page
 
     /**
      * @ORM\OneToMany(targetEntity=Block::class, mappedBy="page", orphanRemoval=true, fetch="EAGER")
+     * @ORM\OrderBy({"priority"="ASC"})
      */
     private $blocks;
 

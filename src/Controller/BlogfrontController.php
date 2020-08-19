@@ -22,7 +22,10 @@ class BlogfrontController extends AbstractController
         if (!$page) {
             return $this->redirectToRoute("blogfront.not_found");
         }
+
+        $blocks = $page->getBlocks();
         return $this->render("blogfront/show_page.html.twig", [
+            "blocks" => $blocks,
             "page" => $page
         ]);
     }

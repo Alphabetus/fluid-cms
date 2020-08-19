@@ -96,8 +96,6 @@ class Block {
 
         window.block.enableLoading();
 
-        console.log(payload);
-
         $block.remove();
 
         $.ajax({
@@ -134,7 +132,7 @@ class Block {
             url: endpoint,
             type: 'POST',
             data: payload,
-            success: function(data) { console.log(data) },
+            success: function(data) {},
             error: function(data) { console.log(data) }
         })
     }
@@ -155,7 +153,7 @@ class Block {
             url: endpoint,
             type: 'POST',
             data: payload,
-            success: function(data) { console.log(data) },
+            success: function(data) {},
             error: function(data) { console.log(data) }
         })
     }
@@ -321,7 +319,7 @@ window.reassignPriority = function() {
         url: endpoint,
         type: 'POST',
         data: payload,
-        success: function(d) { console.log(d) },
+        success: function(d) {},
         error: function(d) { console.log(d) }
     });
 

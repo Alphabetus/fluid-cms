@@ -110,3 +110,7 @@ app:
         disclaimer:
           homepage: "Use this tool to select your homepage."
           maintenance: "When this tool is enabled your website will be in maintenance mode."
+      pages:
+        not_found:
+          title: "404 Page Not Found"
+          disclaimer: "This content does not exist or it have been moved to another place."

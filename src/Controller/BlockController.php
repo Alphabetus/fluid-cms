@@ -23,12 +23,13 @@ class BlockController extends AbstractController
     {
         $id = $request->request->get("page_id");
         $type =  $request->request->get("type");
+        $priority = $request->request->get("priority");
         $page = $this->getDoctrine()->getRepository(Page::class)->find($id);
         $block = new Block();
         $em = $this->getDoctrine()->getManager();
         $block->setPage($page);
         $block->setType($type);
-        $block->setPriority('0');
+        $block->setPriority($priority);
         $block->setMobileBreakpoint("col-12");
         $block->setDesktopBreakpoint("col-md-12");
         $block->setBuid(Uuid::v1());

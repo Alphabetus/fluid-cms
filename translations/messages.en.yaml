@@ -12,14 +12,17 @@ app:
 
 
 
-
-
-
   # backend block
 
 
   backend:
     # Menu block which contains the sidebar navigation
+    webpagestitles:
+      admin: "Admin"
+      settings: "Global Settings"
+      newpage: "Create new page"
+      viewpages: "View pages"
+
     menus:
       sidebar:
         titles:

@@ -40,6 +40,8 @@ app:
       pagedetails: "Page Details"
       editpagecontent: "Edit Page Content"
       block_edit: "Edit block content"
+      home_page_setting: "Homepage Settings"
+      maintenance_mode: "Maintenance Mode"
 
     # Buttons without form
     buttons:
@@ -93,5 +95,14 @@ app:
           content: "Type the content of this block"
         buttons:
           submit: "Update Block Content"
+
+      change_homepage:
+        alert: "Homepage Updated"
+
+      change_maintenance:
+        alert: "Maintenance Mode Updated"
+        options:
+          enabled: "Enabled"
+          disabled: "Disabled"
 
 

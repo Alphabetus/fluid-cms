@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BlockController extends AbstractController
 {
@@ -135,16 +136,17 @@ class BlockController extends AbstractController
      * @param Request $request
      * @param string $buid
      * @param ValidatorInterface $validator
+     * @param TranslatorInterface $translator
      * @return Response
      * @Route("/admin/blocks/edit/{buid}", name="blocks.edit")
      */
-    public function editBlock(Request $request, string $buid, ValidatorInterface $validator): Response
+    public function editBlock(Request $request, string $buid, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {
         $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
         $form = $this->createForm(EditBlockFormType::class, $block);
 
         if (!$block) {
-            $this->addFlash("error", "Block Not Found");
+            $this->addFlash("error", $translator->trans('app.controller.blockController.editblock_nonexist'));
             return $this->redirectToRoute("admin");
         }
 
@@ -160,7 +162,7 @@ class BlockController extends AbstractController
                 $block = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-                $this->addFlash("success", "Block Updated");
+                $this->addFlash("success", $translator->trans('app.controller.pagecontroller.edit_success'));
                 $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
             }
         }

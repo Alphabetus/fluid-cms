@@ -61,7 +61,7 @@ class Block
     private $image_name;
 
     /**
-     * @Vich\UploadableField(mapping="block_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="block_image", fileNameProperty="imageName")
      * @var File\Null
      */
     private $image_file;
@@ -165,5 +165,18 @@ class Block
         $this->image_name = $image_name;
 
         return $this;
+    }
+
+    /**
+     * @return File\Null
+     */
+    public function getImageFile()
+    {
+        return $this->image_file;
+    }
+
+    public function setImageFile( $image_file): void
+    {
+        $this->image_file = $image_file;
     }
 }

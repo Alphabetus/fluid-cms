@@ -6,6 +6,7 @@ use App\Entity\Block;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class EditBlockFormType extends AbstractType
 {
@@ -13,6 +14,7 @@ class EditBlockFormType extends AbstractType
     {
         $builder
             ->add('content')
+            ->add('image_file', VichFileType::class)
         ;
     }
 

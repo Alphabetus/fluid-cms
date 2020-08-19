@@ -1,0 +1,20 @@
+{% extends "base_admin.html.twig" %}
+
+{% block admin_body %}
+
+    <div class="container-fluid p-0">
+        <div class="row justify-content-between">
+            <div class="col-12 align-self-center-center">
+                <h2>{{ "app.backend.headers.block_edit"|trans }}</h2>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    {% if block.type == "text" %}
+        {% include "block/components/text_block.html.twig" %}
+    {% else %}
+        IMAGE NOT READY YET
+    {% endif %}
+
+{% endblock %}

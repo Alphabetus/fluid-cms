@@ -18,6 +18,10 @@
             </div>
 
             <div class="col-12">
+                <div class="alert alert-info text-xs mb-1">
+                    {{ "app.backend.content.settings.disclaimer.homepage"|trans }}
+                </div>
+
                 <select name="homepage" class="custom-select" onchange="javascript:window.selectHomepage.call(this)" data-endpoint="{{ path("admin.settings.update.homepage") }}">
                     {% for page in pages %}
                         <option value="{{ page.puid }}" {% if current_homepage == page.puid %}selected="true"{% endif %}>{{ page.title }}</option>
@@ -39,6 +43,10 @@
             </div>
 
             <div class="col-12">
+                <div class="alert alert-info text-xs mb-1">
+                    {{ "app.backend.content.settings.disclaimer.maintenance"|trans }}
+                </div>
+
                 <select name="maintenance" class="custom-select" data-endpoint="{{ path("admin.settings.update.maintenance") }}" onchange="javascript:window.selectMaintenance.call(this)">
                     <option value="0" {% if current_maintenance == 'false' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.disabled"|trans }}</option>
                     <option value="1" {% if current_maintenance == 'true' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.enabled"|trans }}</option>

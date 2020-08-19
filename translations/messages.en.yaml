@@ -105,4 +105,8 @@ app:
           enabled: "Enabled"
           disabled: "Disabled"
 
-
+    content:
+      settings:
+        disclaimer:
+          homepage: "Use this tool to select your homepage."
+          maintenance: "When this tool is enabled your website will be in maintenance mode."

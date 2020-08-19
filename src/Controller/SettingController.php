@@ -52,9 +52,9 @@ class SettingController extends AbstractController
     {
         $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
         $current_homepage = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
-        $current_homepage = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
+        $current_maintenance = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
         return $this->render("admin/settings.html.twig", [
-            "current_maintenance" => $current_homepage,
+            "current_maintenance" => $current_maintenance,
             "current_homepage" => $current_homepage,
             "pages" => $pages
         ]);

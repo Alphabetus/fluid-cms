@@ -62,10 +62,14 @@ class Block {
         const endpoint = $this.data('href');
         const type = $this.data('type');
         const page_id = $this.data('page');
+        const $total_blocks = $('.block').not('.gu-mirror');
+        const block_priority = $total_blocks.length;
+
 
         const payload = {
             page_id: page_id,
-            type: type
+            type: type,
+            priority: block_priority
         }
 
         $.ajax({

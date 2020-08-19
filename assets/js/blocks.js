@@ -57,7 +57,8 @@ class Block {
         const $this = $(this);
         const $block = $this.closest('.block');
         const buid = $block.attr('id');
-        location.replace("/admin/blocks/edit/" + buid);
+        //location.replace("/admin/blocks/edit/" + buid);
+        window.open("/admin/blocks/edit/" + buid, "_blank") || window.location.replace("/admin/blocks/edit/" + buid);
     }
 
     createBlock() {

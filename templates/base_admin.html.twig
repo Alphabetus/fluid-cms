@@ -1,12 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: ".tinymce",
+            plugins: "advlist autolink lists link charmap print preview hr"
+        });
+    </script>
+{% endblock %}
+
 {% block navigation %}
     {% include "shared/admin_menu.html.twig" %}
 {% endblock %}
 
 {% block body %}
 
-    {{ tinymce_init() }}
+    {# tinymce_init() #}
+
 
     {% include "admin/sidebar.html.twig" %}
     <div class="admin__wrapper container-fluid mt-3">

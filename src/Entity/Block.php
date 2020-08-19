@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\BlockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=BlockRepository::class)
+ * @Vich\Uploadable()
  */
 class Block
 {
@@ -52,6 +54,17 @@ class Block
      * @ORM\Column(type="integer")
      */
     private $priority;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_name;
+
+    /**
+     * @Vich\UploadableField(mapping="block_image", fileNameProperty="imageName", size="imageSize")
+     * @var File\Null
+     */
+    private $image_file;
 
     public function getId(): ?int
     {
@@ -138,6 +151,18 @@ class Block
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->image_name;
+    }
+
+    public function setImageName(?string $image_name): self
+    {
+        $this->image_name = $image_name;
 
         return $this;
     }

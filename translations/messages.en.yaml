@@ -1,6 +1,23 @@
 app:
 
+  #texts in controllers eg. addflash etc
+  controller:
+    pagecontroller:
+      createpage_success: "Page details edited"
+      edit_error: "Page not found!"
+      edit_success: "Page details edited"
+    blockController:
+      editblock_nonexist: "Block Not Found"
+      editblock_success: "Block Updated"
+
+
+
+
+
+
   # backend block
+
+
   backend:
     # Menu block which contains the sidebar navigation
     menus:

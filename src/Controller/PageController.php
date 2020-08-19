@@ -13,19 +13,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 
 class PageController extends AbstractController
 {
     /**
      * @param Request $request
      * @param ValidatorInterface $validator
+     * @param TranslatorInterface $translator
      * @return Response
      * @Route("{_locale}/admin/pages/new",
      *     name="admin.pages.new",
      *     defaults={"_locale"="en"}
      * )
      */
-    public function new(Request $request, ValidatorInterface $validator): Response
+    public function new(Request $request, ValidatorInterface $validator,TranslatorInterface $translator): Response
     {
         $page = new Page();
         $form = $this->createForm(NewPageFormType::class, $page);
@@ -47,7 +50,8 @@ class PageController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($page);
                 $em->flush();
-                $this->addFlash('success', "Your page was created successfully");
+
+                $this->addFlash('success', $translator->trans('app.controller.pagecontroller.createpage_success'));
                 // todo create log entry
                 return $this->redirectToRoute("admin.pages.list");
             }
@@ -77,17 +81,18 @@ class PageController extends AbstractController
      * @param $puid
      * @param Request $request
      * @param ValidatorInterface $validator
+     * @param TranslatorInterface $translator
      * @return Response
      * @Route("{_locale}/admin/pages/edit/{puid}/",
      *     name="admin.page.edit",
      *     defaults={"_locale"="en"}
      * )
      */
-    public function edit($puid, Request $request, ValidatorInterface $validator): Response
+    public function edit($puid, Request $request, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {
         $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
         if (!$page) {
-            $this->addFlash('error', "Page not found!");
+            $this->addFlash('error', $translator->trans('app.controller.pagecontroller.edit_error'));
             return $this->redirectToRoute("admin.pages.list");
         }
 
@@ -105,7 +110,7 @@ class PageController extends AbstractController
             } else {
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-                $this->addFlash('success', 'Page details edited');
+                $this->addFlash('success', $translator->trans('app.controller.pagecontroller.edit_success'));
                 return $this->redirectToRoute('admin.page.edit', ['puid' => $page->getPuid()]);
             }
         }

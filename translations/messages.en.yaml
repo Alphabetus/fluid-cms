@@ -22,6 +22,7 @@ app:
       existentpages: "Existent Pages"
       pagedetails: "Page Details"
       editpagecontent: "Edit Page Content"
+      block_edit: "Edit block content"
 
     # Buttons without form
     buttons:
@@ -68,6 +69,12 @@ app:
           add-text-block: "Add Text Block"
           add-image-block: "Add Image Block"
 
-
+      edit_block_contents:
+        labels:
+          content: "Edit block content"
+        placeholders:
+          content: "Type the content of this block"
+        buttons:
+          submit: "Update Block Content"
 
 

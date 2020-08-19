@@ -14,7 +14,7 @@ class Block {
                             <small>type: text</small>
                         </div>
                         <div class="col-6 p-0 text-right align-self-center">
-                            <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="">edit content</button>
+                            <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
                         </div>
                     </div>
                     <div class="row m-0">
@@ -51,6 +51,13 @@ class Block {
     disableLoading() {
         $("#addBlocksButton").removeClass("disabled")
         $('#blocks__load').css("display", "none");
+    }
+
+    openEditBlock() {
+        const $this = $(this);
+        const $block = $this.closest('.block');
+        const buid = $block.attr('id');
+        location.replace("/admin/blocks/edit/" + buid);
     }
 
     createBlock() {
@@ -222,7 +229,7 @@ class Block {
                                         <small>type: text</small>
                                     </div>
                                     <div class="col-6 p-0 text-right align-self-center">
-                                        <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="">edit content</button>
+                                        <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
                                     </div>
                                 </div>
                                 <div class="row m-0">

@@ -6,11 +6,14 @@ namespace App\Controller;
 
 use App\Entity\Block;
 use App\Entity\Page;
+use App\Form\EditBlockFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class BlockController extends AbstractController
 {
@@ -126,6 +129,46 @@ class BlockController extends AbstractController
         }
 
         return new JsonResponse("ok", 200);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $buid
+     * @param ValidatorInterface $validator
+     * @return Response
+     * @Route("/admin/blocks/edit/{buid}", name="blocks.edit")
+     */
+    public function editBlock(Request $request, string $buid, ValidatorInterface $validator): Response
+    {
+        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $form = $this->createForm(EditBlockFormType::class, $block);
+
+        if (!$block) {
+            $this->addFlash("error", "Block Not Found");
+            return $this->redirectToRoute("admin");
+        }
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $errors = $validator->validate($block);
+
+            if (count($errors) > 0) {
+                $errorString = (string) $errors;
+                $this->addFlash("error", $errorString);
+                return $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
+            } else {
+                $block = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash("success", "Block Updated");
+                $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
+            }
+        }
+
+        return $this->render("block/edit.html.twig", [
+            "form" => $form->createView(),
+            "block" => $block
+        ]);
     }
     
     protected function logger($content)

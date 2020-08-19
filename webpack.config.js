@@ -32,6 +32,7 @@ Encore
     .addEntry('locales', './assets/js/locales.js')
     .addEntry('blocks', './assets/js/blocks.js')
     .addEntry('sidebar', './assets/js/sidebar.js')
+    .addEntry('pages', './assets/js/pages.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

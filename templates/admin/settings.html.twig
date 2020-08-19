@@ -11,4 +11,44 @@
         <hr>
     </div>
 
+    <div class="container-fluid p-0">
+        <div class="row justify-content-between">
+            <div class="col-12 align-self-center-center">
+                <h4>{{ "app.backend.headers.home_page_setting"|trans }}</h4>
+            </div>
+
+            <div class="col-12">
+                <select name="homepage" class="custom-select" onchange="javascript:window.selectHomepage.call(this)" data-endpoint="{{ path("admin.settings.update.homepage") }}">
+                    {% for page in pages %}
+                        <option value="{{ page.puid }}" {% if current_homepage == page.puid %}selected="true"{% endif %}>{{ page.title }}</option>
+                    {% endfor %}
+                </select>
+                <div id="homepageChangeAlert" class="alert alert-success d-none mt-2">
+                    {{ "app.backend.forms.change_homepage.alert"|trans }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid p-0 mt-2">
+        <div class="row justify-content-between">
+            <div class="col-12 align-self-center-center">
+                <h4>{{ "app.backend.headers.maintenance_mode"|trans }}</h4>
+            </div>
+
+            <div class="col-12">
+                <select name="maintenance" class="custom-select" data-endpoint="{{ path("admin.settings.update.maintenance") }}" onchange="javascript:window.selectMaintenance.call(this)">
+                    <option value="0" {% if current_maintenance == 'false' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.disabled"|trans }}</option>
+                    <option value="1" {% if current_maintenance == 'true' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.enabled"|trans }}</option>
+                </select>
+
+                <div id="maintenanceChangeAlert" class="alert alert-success d-none mt-2">
+                    {{ "app.backend.forms.change_maintenance.alert"|trans }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

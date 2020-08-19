@@ -19,15 +19,4 @@ class AdminController extends AbstractController
     {
         return $this->render("base_admin.html.twig");
     }
-
-    /**
-     * @Route("{_locale}/settings",
-     *     name="admin.settings",
-     *     defaults={"_locale"="en"}
-     * )
-     */
-    public function showSettings()
-    {
-        return $this->render("admin/settings.html.twig");
-    }
 }

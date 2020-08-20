@@ -9,6 +9,7 @@ app:
     blockController:
       editblock_nonexist: "Block Not Found"
       editblock_success: "Block Updated"
+      image_updated_ok: "Your image was updated"
 
 
 

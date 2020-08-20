@@ -1,14 +1,11 @@
 
 <div class="container-fluid p-0">
 
-    {% if block.imageFile %}
+    {% if block.imageName %}
     <div class="row justify-content-center">
         <div class="col-12">
-            <div class="card m-auto" style="width: 50%;">
-                <img src="{{ vich_uploader_asset(block, 'image_file') }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ "app.backend.content.blocks.image-blocks.title"|trans }}</h5>
-                </div>
+            <div class="card m-auto rounded" style="width: 50%;">
+                <img src="{{ vich_uploader_asset(block, 'image_file') }}" class="card-img-top rounded" alt="...">
             </div>
         </div>
     </div>

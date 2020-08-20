@@ -175,8 +175,8 @@ class BlockController extends AbstractController
             $block = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            $this->addFlash("success", "done");
-            $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
+            $this->addFlash("success", $translator->trans('app.controller.blockController.image_updated_ok'));
+            return $this->redirectToRoute("blocks.edit", ['buid' => $buid]);
         }
 
         return $this->render("block/edit.html.twig", [

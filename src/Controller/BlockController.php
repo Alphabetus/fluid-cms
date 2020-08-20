@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Block;
 use App\Entity\Page;
 use App\Form\EditBlockFormType;
+use App\Form\EditBlockImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -144,6 +145,7 @@ class BlockController extends AbstractController
     {
         $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
         $form = $this->createForm(EditBlockFormType::class, $block);
+        $form_image = $this->createForm(EditBlockImageType::class, $block);
 
         if (!$block) {
             $this->addFlash("error", $translator->trans('app.controller.blockController.editblock_nonexist'));
@@ -160,6 +162,7 @@ class BlockController extends AbstractController
                 return $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
             } else {
                 $block = $form->getData();
+                //$this->logger($form->getData());
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash("success", $translator->trans('app.controller.pagecontroller.edit_success'));
@@ -167,8 +170,18 @@ class BlockController extends AbstractController
             }
         }
 
+        $form_image->handleRequest($request);
+        if ($form_image->isSubmitted()) {
+            $block = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash("success", $translator->trans('app.controller.blockController.image_updated_ok'));
+            return $this->redirectToRoute("blocks.edit", ['buid' => $buid]);
+        }
+
         return $this->render("block/edit.html.twig", [
             "form" => $form->createView(),
+            "form_image" => $form_image->createView(),
             "block" => $block
         ]);
     }

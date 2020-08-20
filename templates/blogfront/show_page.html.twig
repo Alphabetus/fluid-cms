@@ -8,10 +8,10 @@
 {% block body %}
     <div class="container p-0 mt-2">
 
-        <div class="row justify-content between">
+        <div class="row justify-content between m-0">
 
             {% for block in blocks %}
-                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center">
+                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center mt-4 px-2">
                     {% if block.type == 'text' %}
                         {{ block.content|raw }}
                     {% endif %}

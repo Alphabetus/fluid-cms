@@ -166,7 +166,6 @@ class BlockController extends AbstractController
                 return $this->redirectToRoute("blocks.edit", ["buid" => $buid]);
             } else {
                 $block = $form->getData();
-                //$this->logger($form->getData());
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash("success", $translator->trans('app.controller.pagecontroller.edit_success'));
@@ -188,14 +187,5 @@ class BlockController extends AbstractController
             "form_image" => $form_image->createView(),
             "block" => $block
         ]);
-    }
-    
-    protected function logger($content)
-    {
-        $file = "test.php";
-        ob_start();
-        var_dump($content);
-        $testing = ob_get_clean();
-        file_put_contents($file, $testing, FILE_APPEND);
     }
 }

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\GlobalSetting;
 use App\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,5 +38,31 @@ class BlogfrontController extends AbstractController
     public function notFound(): Response
     {
         return $this->render("blogfront/404.html.twig");
+    }
+
+    /**
+     * @return Response
+     * @Route("/", name="root")
+     */
+    public function root(): Response
+    {
+        $homepage_setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
+        $pageRepository = $this->getDoctrine()->getRepository(Page::class);
+        if ($homepage_setting == "") {
+            return new Response("Configure your homepage in the Administration > Global Settings");
+        }
+
+        $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
+
+        if ($page) {
+            $blocks = $page->getBlocks();
+            return $this->render("blogfront/show_page.html.twig", [
+                "blocks" => $blocks,
+                "page" => $page
+            ]);
+        } else {
+            return new Response("Your homepage can not be found.");
+        }
+
     }
 }

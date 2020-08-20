@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Block;
 use App\Entity\Page;
+use App\Entity\Log;
 use App\Form\EditBlockFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,12 +41,17 @@ class BlockController extends AbstractController
         $em->persist($block);
         $em->flush();
 
+        $log= new Log();
+        $log->logaction("Block", $block->getType() );
+
+
 
         return new JsonResponse($block->getBuid(), 200);
     }
 
     /**
      * @param Request $request
+     * @return JsonResponse
      * @Route("/blocks/delete", name="blocks.delete")
      */
     public function removeBlock(Request $request): JsonResponse

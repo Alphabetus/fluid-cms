@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @ORM\Entity(repositoryClass=LogRepository::class)
  */
-class Log
+class Log extends AbstractController
 {
     /**
      * @ORM\Id()
@@ -72,4 +73,19 @@ class Log
 
         return $this;
     }
+
+    public function logaction($title,$content):void{
+
+        $var=$content;
+        $cont=(string)$var;
+        $em = $this->getDoctrine()->getManager();
+
+        $log = new Log();
+        $log->setTitle($title);
+        $log->setContent($cont);
+        $em->persist($log);
+        $em->flush();
+
+    }
+
 }

@@ -8,12 +8,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class EditBlockFormType extends AbstractType
+class EditBlockImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content')
+            ->add('image_file', VichFileType::class)
         ;
     }
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BlockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -65,6 +66,11 @@ class Block
      * @var File\Null
      */
     private $image_file;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -175,8 +181,23 @@ class Block
         return $this->image_file;
     }
 
-    public function setImageFile( $image_file): void
+    public function setImageFile(File $image_file = null): void
     {
         $this->image_file = $image_file;
+        if ($image_file) {
+            $this->updated_at = new \DateTime('now');
+        }
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 }

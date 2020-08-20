@@ -22,7 +22,7 @@ app:
       settings: "Global Settings"
       newpage: "Create new page"
       viewpages: "View pages"
-      editpages: "Edit Page Details and Content"
+      editpage: "Edit the page"
 
     menus:
       sidebar:

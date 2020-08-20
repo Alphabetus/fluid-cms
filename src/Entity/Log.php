@@ -72,9 +72,20 @@ class Log extends AbstractController
         $this->createdAt = $createdAt;
 
         return $this;
+
     }
 
-    public function logaction($title,$content):void{
+    public static function logEntry($title, $content, $em): void
+    {
+        $log = new Log();
+        $log->setTitle((string) $title);
+        $log->setContent((string) $content);
+        $log->setCreatedAt(new \DateTime());
+        $em->persist($log);
+        $em->flush();
+    }
+
+/*    public function logaction($title,$content):void{
 
         $var=$content;
         $cont=(string)$var;
@@ -86,6 +97,5 @@ class Log extends AbstractController
         $em->persist($log);
         $em->flush();
 
-    }
-
+    }*/
 }

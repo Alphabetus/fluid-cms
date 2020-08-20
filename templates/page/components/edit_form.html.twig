@@ -2,7 +2,9 @@
 <div class="row justify-content-center">
 
     <div class="col-12">
-        {{ form_label(form.title, "app.backend.forms.edit_page_metadetails.labels.pagetitle"|trans) }}
+        {{ form_label(form.title,"app.backend.forms.edit_page_metadetails.labels.pagetitle"|trans) }}
+
+
         {{ form_widget(form.title, {
             "attr": {
                 "class" : "form-control",

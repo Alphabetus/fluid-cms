@@ -42,7 +42,11 @@ class BlockController extends AbstractController
         $em->flush();
 
 
-        return new JsonResponse($block->getBuid(), 200);
+        $output = [
+            "buid" => $block->getBuid(),
+            "type" => $block->getType()
+        ];
+        return new JsonResponse(json_encode($output), 200);
     }
 
     /**

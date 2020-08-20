@@ -40,13 +40,5 @@ class BlogfrontController extends AbstractController
         return $this->render("blogfront/404.html.twig");
     }
 
-    /**
-     * @Route("/test/test")
-     */
-    public function test()
-    {
-        $em = $this->getDoctrine()->getManager();
-        Log::logEntry("title", "message", $em);
-        return new Response("OK");
-    }
+
 }

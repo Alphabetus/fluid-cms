@@ -75,27 +75,15 @@ class Log extends AbstractController
 
     }
 
-    public static function logEntry($title, $content, $em): void
+    public static function logEntry($title, $content,$type,$action,$em): void
     {
         $log = new Log();
         $log->setTitle((string) $title);
-        $log->setContent((string) $content);
+        $log->setContent((string) $action." a ".$title." ( ".$type.")  having id:".$content);
         $log->setCreatedAt(new \DateTime());
         $em->persist($log);
         $em->flush();
     }
 
-/*    public function logaction($title,$content):void{
 
-        $var=$content;
-        $cont=(string)$var;
-        $em = $this->getDoctrine()->getManager();
-
-        $log = new Log();
-        $log->setTitle($title);
-        $log->setContent($cont);
-        $em->persist($log);
-        $em->flush();
-
-    }*/
 }

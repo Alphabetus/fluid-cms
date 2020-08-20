@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Log;
 use App\Entity\Page;
 use App\Form\EditPageFormType;
 use App\Form\NewPageFormType;
@@ -50,6 +51,7 @@ class PageController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($page);
                 $em->flush();
+                Log::logEntry("Page",$page->getId(),$page->getSlug(),"created",$em);
 
                 $this->addFlash('success', $translator->trans('app.controller.pagecontroller.createpage_success'));
                 // todo create log entry
@@ -110,6 +112,7 @@ class PageController extends AbstractController
             } else {
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
+                Log::logEntry("Page",$page->getId(),$page->getSlug(),"edited",$em);
                 $this->addFlash('success', $translator->trans('app.controller.pagecontroller.edit_success'));
                 return $this->redirectToRoute('admin.page.edit', ['puid' => $page->getPuid()]);
             }

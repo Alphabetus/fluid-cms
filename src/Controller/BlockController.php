@@ -41,8 +41,7 @@ class BlockController extends AbstractController
         $em->persist($block);
         $em->flush();
 
-        $log= new Log();
-        $log->logaction("Block", $block->getType() );
+        Log::logEntry("Block",$block->getId(),$block->getType(),"created",$em);
 
 
 
@@ -59,8 +58,12 @@ class BlockController extends AbstractController
         $buid = $request->request->get("buid");
         $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
+        Log::logEntry("Block",$block->getId(),$block->getType(),"removed",$em);
+
         $em->remove($block);
         $em->flush();
+
+
         return new JsonResponse("ok", 200);
     }
 
@@ -76,6 +79,8 @@ class BlockController extends AbstractController
         $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
         $block->setDesktopBreakpoint($desk_breakpoint);
+        Log::logEntry("Block",$block->getId(),$block->getType(),"resized(BlockMd)",$em);
+
         $em->flush();
         return new JsonResponse("ok", 200);
     }
@@ -92,6 +97,8 @@ class BlockController extends AbstractController
         $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
         $block->setMobileBreakpoint($mob_breakpoint);
+        Log::logEntry("Block",$block->getId(),$block->getType(),"resized(blockMobile)",$em);
+
         $em->flush();
         return new JsonResponse("ok", 200);
     }
@@ -111,6 +118,8 @@ class BlockController extends AbstractController
             'circular_reference_handler' => function ($object) {
                 return $object->getId();
             }
+
+
         ]);
 
 
@@ -132,6 +141,8 @@ class BlockController extends AbstractController
         foreach ($priorityArray as $index => $value) {
             $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $value]);
             $block->setPriority($index);
+            Log::logEntry("Block",$block->getId(),$block->getType(),"priority changed",$em);
+
             $em->flush();
         }
 
@@ -167,6 +178,8 @@ class BlockController extends AbstractController
             } else {
                 $block = $form->getData();
                 $em = $this->getDoctrine()->getManager();
+                Log::logEntry("Block",$block->getId(),$block->getType(),"edited",$em);
+
                 $em->flush();
                 $this->addFlash("success", $translator->trans('app.controller.pagecontroller.edit_success'));
                 $this->redirectToRoute("blocks.edit", ["buid" => $buid]);

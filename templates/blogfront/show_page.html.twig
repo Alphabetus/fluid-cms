@@ -6,13 +6,19 @@
 
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container p-0 mt-2">
 
         <div class="row justify-content between">
 
             {% for block in blocks %}
                 <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center">
-                    {{ block.content|raw }}
+                    {% if block.type == 'text' %}
+                        {{ block.content|raw }}
+                    {% endif %}
+
+                    {% if block.type == 'image' %}
+                        <img src="{{ vich_uploader_asset(block, 'image_file') }}" class="img-fluid">
+                    {% endif %}
                 </div>
             {% endfor %}
 

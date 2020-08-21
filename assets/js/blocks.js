@@ -1,48 +1,5 @@
 
 class Block {
-    constructor() {
-        this.template = `
-        <div class="col-12 block mt-2 shadow-sm" data-priority="0">
-            <div class="row h-100 mt-3">
-                <div class="close" onclick="javascript:window.block.deleteBlock.call(this)">
-                    &times;
-                </div>
-                <div class="col-12 align-self-center">
-                    <div class="row m-0 justify-content-between">
-                        <div class="col-6 p-0 align-self-center text-truncate pr-1">
-                            <h6 class="m-0 overflow-hidden">Block Name</h6>
-                            <small>type: text</small>
-                        </div>
-                        <div class="col-6 p-0 text-right align-self-center">
-                            <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
-                        </div>
-                    </div>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0 align-self-center">
-                            <label>Desktop</label>
-                            <select class="custom-select" name="desktop-breakpoint" onchange="javascript:window.block.resizeBlock.call(this)">
-                                <option value="1" selected>Full</option>
-                                <option value="2">Half</option>
-                                <option value="3">Third</option>
-                                <option value="4">Forth</option>
-                                <option value="5">2 Thirds</option>
-                                <option value="6">3 Forths</option>
-                            </select>
-                        </div>
-                        <div class="col-6 pr-0 align-self-center">
-                            <label>Mobile</label>
-                            <select class="custom-select" name="mobile-breakpoint" onchange="javascript:window.block.resizeBlockMobile.call(this)">
-                                <option value="1" selected>Full</option>
-                                <option value="2">Half</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `;
-    }
-
     enableLoading() {
         $("#addBlocksButton").addClass("disabled");
         $('#blocks__load').css("display", "initial");
@@ -90,10 +47,48 @@ class Block {
     }
 
     printBlock(data) {
-        let $block = $(this.template);
+        const parsedData = JSON.parse(data)
+        let $block = `
+            <div id="${ parsedData.buid }" class="col-12 block mt-2 shadow-sm" data-priority="0">
+                <div class="row h-100 mt-3">
+                    <div class="close" onclick="javascript:window.block.deleteBlock.call(this)">
+                        &times;
+                    </div>
+                    <div class="col-12 align-self-center">
+                        <div class="row m-0 justify-content-between">
+                            <div class="col-6 p-0 align-self-center text-truncate pr-1">
+                                <h6 class="m-0 overflow-hidden">${ window.block.nameBlock(parsedData.type) } Block</h6>
+                                <small>type: text</small>
+                            </div>
+                            <div class="col-6 p-0 text-right align-self-center">
+                                <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-6 pl-0 align-self-center">
+                                <label>Desktop</label>
+                                <select class="custom-select" name="desktop-breakpoint" onchange="javascript:window.block.resizeBlock.call(this)">
+                                    <option value="1" selected>Full</option>
+                                    <option value="2">Half</option>
+                                    <option value="3">Third</option>
+                                    <option value="4">Forth</option>
+                                    <option value="5">2 Thirds</option>
+                                    <option value="6">3 Forths</option>
+                                </select>
+                            </div>
+                            <div class="col-6 pr-0 align-self-center">
+                                <label>Mobile</label>
+                                <select class="custom-select" name="mobile-breakpoint" onchange="javascript:window.block.resizeBlockMobile.call(this)">
+                                    <option value="1" selected>Full</option>
+                                    <option value="2">Half</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
         const $block_container = $('#blocks');
-
-        $block.attr('id', data);
 
         $block_container.append($block);
         window.block.disableLoading();
@@ -216,6 +211,8 @@ class Block {
         let $deskSelector;
         let $mobSelector;
 
+        console.log(parsedData)
+
         for(var x = 0; x < parsedData.length; x++) {
             $container.append(`
                     <div id="${ parsedData[x].buid }" class="${ parsedData[x].desktopBreakpoint } block mt-2 shadow-sm" data-priority="0">
@@ -226,7 +223,7 @@ class Block {
                             <div class="col-12 align-self-center">
                                 <div class="row m-0 justify-content-between">
                                     <div class="col-6 p-0 align-self-center text-truncate pr-1">
-                                        <h6 class="m-0 overflow-hidden">Block Name</h6>
+                                        <h6 class="m-0 overflow-hidden">${ window.block.nameBlock(parsedData[x].type) } Block</h6>
                                         <small>type: text</small>
                                     </div>
                                     <div class="col-6 p-0 text-right align-self-center">
@@ -264,6 +261,10 @@ class Block {
             $deskSelector.val(window.block.getValueFromClass(parsedData[x].desktopBreakpoint));
             $mobSelector.val(window.block.getValueFromClassMobile(parsedData[x].mobileBreakpoint));
         }
+    }
+
+    nameBlock(block_type) {
+        return block_type.charAt(0).toUpperCase() + block_type.slice(1);
     }
 }
 

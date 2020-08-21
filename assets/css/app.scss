@@ -13,6 +13,11 @@ $primary: #109e92;
 @import 'typography';
 @import 'pages';
 
+html {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
     background-color: lightgray;
 }

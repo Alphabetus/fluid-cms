@@ -24,3 +24,7 @@
   top: 5px;
   cursor: pointer;
 }
+
+
+
+.required:not(.keep) { display: none }

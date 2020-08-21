@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\BlockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=BlockRepository::class)
+ * @Vich\Uploadable()
  */
 class Block
 {
@@ -52,6 +55,22 @@ class Block
      * @ORM\Column(type="integer")
      */
     private $priority;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_name;
+
+    /**
+     * @Vich\UploadableField(mapping="block_image", fileNameProperty="imageName")
+     * @var File\Null
+     */
+    private $image_file;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -138,6 +157,46 @@ class Block
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->image_name;
+    }
+
+    public function setImageName(?string $image_name): self
+    {
+        $this->image_name = $image_name;
+
+        return $this;
+    }
+
+    /**
+     * @return File\Null
+     */
+    public function getImageFile()
+    {
+        return $this->image_file;
+    }
+
+    public function setImageFile(File $image_file = null): void
+    {
+        $this->image_file = $image_file;
+        if ($image_file) {
+            $this->updated_at = new \DateTime('now');
+        }
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

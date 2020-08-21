@@ -9,6 +9,7 @@ app:
     blockController:
       editblock_nonexist: "Block Not Found"
       editblock_success: "Block Updated"
+      image_updated_ok: "Your image was updated"
 
 
 
@@ -23,6 +24,7 @@ app:
       newpage: "Create new page"
       viewpages: "View pages"
       editpage: "Edit the page"
+      editblock: "Edit Block Content"
 
     menus:
       sidebar:
@@ -100,6 +102,14 @@ app:
         buttons:
           submit: "Update Block Content"
 
+      edit_image_block_contents:
+        labels:
+          file: "Select an image for the block"
+        buttons:
+          submit: "Upload Image"
+        display:
+          uploading: "uploading"
+
       change_homepage:
         alert: "Homepage Updated"
 
@@ -118,3 +128,6 @@ app:
         not_found:
           title: "404 Page Not Found"
           disclaimer: "This content does not exist or it have been moved to another place."
+      blocks:
+        image-blocks:
+          title: "Selected Image"

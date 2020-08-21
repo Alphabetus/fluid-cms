@@ -1,0 +1,53 @@
+
+<div class="container-fluid p-0">
+
+    {% if block.imageName %}
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card m-auto rounded" style="width: 50%;">
+                <img src="{{ vich_uploader_asset(block, 'image_file') }}" class="card-img-top rounded" alt="...">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {{ form_start(form_image) }}
+
+        <div class="row justify-content-center mt-5">
+
+            <div class="col-12 custom-file">
+                {{ form_label(form_image.image_file, "app.backend.forms.edit_image_block_contents.labels.file"|trans, {
+                    "label_attr" : {
+                        "class" : "keep"
+                    }
+                }) }}
+            </div>
+
+        </div>
+
+    {{ form_end(form_image) }}
+
+
+    <div class="row">
+        <div class="col-12 mt-2">
+            <button class="btn btn-block btn-success" data-load="{{ "app.backend.forms.edit_image_block_contents.display.uploading"|trans }}" onclick="javascript:submitUploadForm.call(this)">{{ "app.backend.forms.edit_image_block_contents.buttons.submit"|trans }}</button>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    function submitUploadForm() {
+        const $this = $(this);
+        const $form = $('[name="edit_block_image"]');
+        const load_string = $this.data('load');
+
+        $this.prop('disabled', true);
+        $this.html(load_string);
+
+        setTimeout(function(){
+            $form.submit();
+        }, 500)
+    }
+</script>

@@ -1,5 +1,9 @@
 {% extends "base_admin.html.twig" %}
 
+{% block title %}
+    {{ "app.backend.webpagestitles.editblock"|trans }}
+{% endblock %}
+
 {% block admin_body %}
 
     <div class="container-fluid p-0">
@@ -14,7 +18,7 @@
     {% if block.type == "text" %}
         {% include "block/components/text_block.html.twig" %}
     {% else %}
-        IMAGE NOT READY YET
+        {% include "block/components/image_block.html.twig" %}
     {% endif %}
 
 {% endblock %}

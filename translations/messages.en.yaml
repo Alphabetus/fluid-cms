@@ -6,6 +6,7 @@ app:
       createpage_success: "Page details edited"
       edit_error: "Page not found!"
       edit_success: "Page details edited"
+      invalid_slug: "You can not have a '/admin' page. Please try again with a different url"
     blockController:
       editblock_nonexist: "Block Not Found"
       editblock_success: "Block Updated"

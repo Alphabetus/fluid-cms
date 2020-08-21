@@ -24,8 +24,11 @@ class BlogfrontController extends AbstractController
             return $this->redirectToRoute("blogfront.not_found");
         }
 
+        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
+
         $blocks = $page->getBlocks();
         return $this->render("blogfront/show_page.html.twig", [
+            "nav_pages" => $nav_pages,
             "blocks" => $blocks,
             "page" => $page
         ]);
@@ -53,23 +56,18 @@ class BlogfrontController extends AbstractController
             return new Response("Configure your homepage in the Administration > Global Settings");
         }
 
-
-
         if ($maintenanceStatus == "true"){
-
             return $this->render("maintanence.html.twig");
         }
 
-        // todo add if statement
-        /**
-         * if ($maintenance_mode == "true") { return twig file }
-         */
+        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 
         if ($page && $page->getActive()) {
             $blocks = $page->getBlocks();
             return $this->render("blogfront/show_page.html.twig", [
+                "nav_pages" => $nav_pages,
                 "blocks" => $blocks,
                 "page" => $page
             ]);

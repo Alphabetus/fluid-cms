@@ -38,6 +38,11 @@ class PageController extends AbstractController
         if ($form->isSubmitted()) {
             $errors = $validator->validate($page);
 
+            if ($form->getData()->getSlug() == "admin") {
+                $this->addFlash("error", $translator->trans("app.controller.pagecontroller.invalid_slug"));
+                return $this->redirectToRoute("admin.pages.new");
+            }
+
             if (count($errors) > 0) {
                 // we have errors
                 $errorString = (string) $errors;
@@ -54,7 +59,6 @@ class PageController extends AbstractController
                 Log::logEntry("Page",$page->getId(),$page->getSlug(),"created",$em);
 
                 $this->addFlash('success', $translator->trans('app.controller.pagecontroller.createpage_success'));
-                // todo create log entry
                 return $this->redirectToRoute("admin.pages.list");
             }
         }

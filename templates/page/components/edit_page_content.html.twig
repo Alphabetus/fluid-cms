@@ -12,8 +12,8 @@
         </button>
 
         <div class="dropdown-menu" aria-labelledby="addBlocksButton">
-            <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-page="{{ page.id }}" data-type="text" data-href="{{ path('blocks.new') }}" disabled="disabled">{{ "app.backend.forms.edit_page_contents.form-buttons.add-text-block"|trans }}</a>
-            <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-type="image" data-href="{{ path('blocks.new') }}" data-page="{{ page.id }}">{{ "app.backend.forms.edit_page_contents.form-buttons.add-image-block"|trans }}</a>
+            <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-page="{{ page.id }}" data-type="text" disabled="disabled">{{ "app.backend.forms.edit_page_contents.form-buttons.add-text-block"|trans }}</a>
+            <a class="dropdown-item" href="#" onclick="javascript:window.block.createBlock.call(this)" data-type="image" data-page="{{ page.id }}">{{ "app.backend.forms.edit_page_contents.form-buttons.add-image-block"|trans }}</a>
         </div>
     </div>
 </div>

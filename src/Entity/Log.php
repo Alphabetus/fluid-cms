@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @ORM\Entity(repositoryClass=LogRepository::class)
  */
-class Log
+class Log extends AbstractController
 {
     /**
      * @ORM\Id()
@@ -71,5 +72,18 @@ class Log
         $this->createdAt = $createdAt;
 
         return $this;
+
     }
+
+    public static function logEntry($title, $content,$type,$action,$em): void
+    {
+        $log = new Log();
+        $log->setTitle((string) $title);
+        $log->setContent((string) $action." a ".$title." ( ".$type.")  having id:".$content);
+        $log->setCreatedAt(new \DateTime());
+        $em->persist($log);
+        $em->flush();
+    }
+
+
 }

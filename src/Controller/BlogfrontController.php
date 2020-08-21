@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Log;
 use App\Entity\GlobalSetting;
 use App\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -1,4 +1,143 @@
 app:
+
+  #texts in controllers eg. addflash etc
+  controller:
+    pagecontroller:
+      createpage_success: "Seitendetails bearbeitet"
+      edit_error: "Seite nicht gefunden!"
+      edit_success: "Bearbeitung Erfolgreich !"
+      invalid_slug: "Du kannst  '/admin' Seite nicht erreichen. Bitte andere url probieren"
+    blockController:
+      editblock_nonexist: "Block nicht gefunden"
+      editblock_success: "Block Aktualisiert"
+      image_updated_ok: "Bild aktualisiert"
+
+
+
+  # backend block
+
+
   backend:
-    menu:
-      new_page: "Neue Seite"
+    # Menu block which contains the sidebar navigation
+    webpagestitles:
+      admin: "Admin"
+      settings: "Global Settings"
+      newpage: "Neue Seite erstellen"
+      viewpages: "Seiten anschauen"
+      editpage: "Seite Bearbeiten"
+      editblock: "Block-inhalt Bearbeiten"
+
+    menus:
+      sidebar:
+        titles:
+          pages: "Seiten"
+          settings: "Settings"
+        items:
+          newpage: "Neue Seite"
+          viewpages: "Seiten anschauen"
+          globalsettings: "Global Settings"
+      topbar:
+        language: "Sprache"
+
+    # headers are outside menu
+    headers:
+      globalsettings: "Global Settings"
+      createpage: "Neue Seite erstellen"
+      existentpages: "Existierende Seiten"
+      pagedetails: "Seiten details"
+      editpagecontent: "Seiten inhalt bearbeiten"
+      block_edit: "block-inhalt bearbeiten"
+      home_page_setting: "Homepage Settings"
+      maintenance_mode: "Wartungsmodus"
+
+    #tableheads
+    thead:
+      title: "Title"
+      description: "Beschreibung"
+      urlpath: "Url Path"
+      published: "veröffentlicht"
+      listed: "aufgelistet"
+      actions: "Aktionen"
+    # Buttons without form
+    buttons:
+      view_pages: "Seiten anschauen"
+      create_page: "Seite erstellen"
+      add_block: "Block hinzufügen"
+
+    # Forms area
+    forms:
+      new_page_creation:
+        labels:
+          pagetitle: "Seitentitle"
+          pagedescription: "Seitenbeschreibung"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Seitentitle bitte!"
+          pagedescription: "Seitenbeschreibung bitte!"
+          urlpath: "URL für diese Seite wählen"
+        checkboxes:
+          pageinNavmenu: "Seite in Navigationsmenu"
+          pageactive: "Seiten Aktiv"
+        form-buttons:
+          submit_createpage: "Seite erstellen"
+
+      edit_page_metadetails:
+        labels:
+          pagetitle: "Seitentitle"
+          pagedescription: "Seitenbeschreibung"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Seitentitle typen"
+          pagedescription: "Seitenbeschreibung bitte !"
+          urlpath: "URL für diese Seite wählen"
+        checkboxes:
+          pageinNavmenu: "Seite in Navigationsmenu"
+          pageactive: "Seite Aktiv"
+        form-buttons:
+          submit_updatedetails: "Details Aktualisieren"
+
+
+      edit_page_contents:
+        form-buttons:
+          add-newblock: "Neue Block hinzufügen"
+          add-text-block: "Neue Text-Block hinzufügrn"
+          add-image-block: "BildBlock hinzufügen"
+
+      edit_block_contents:
+        labels:
+          content: "block content bearbeiten"
+        placeholders:
+          content: "Blockinhalt bitte !"
+        buttons:
+          submit: "Block-inhalt aktualisieren"
+
+      edit_image_block_contents:
+        labels:
+          file: "Ein Bild für die Block auswählen"
+        buttons:
+          submit: "Bild hochladen"
+        display:
+          uploading: "Hochladen im Prozess"
+
+      change_homepage:
+        alert: "Homepage aktualisiert"
+
+      change_maintenance:
+        alert: "Wartungsmodus Aktualisiert"
+        options:
+          enabled: "Aktiviert"
+          disabled: "Deaktiviert"
+
+    content:
+      settings:
+        disclaimer:
+          homepage: "Verwenden Sie dieses Tool, um Ihre Homepage auszuwählen."
+          maintenance: "Wenn dies Tool aktiviert - Ihre Website wird in Wartungsmodus"
+      pages:
+        not_found:
+          title: "404 Seite nicht gefunden"
+          disclaimer: "Dieser Inhalt ist nicht vorhanden oder wurde an einen anderen Ort verschoben."
+
+      blocks:
+        image-blocks:
+          title: "ausgewählte Bild"

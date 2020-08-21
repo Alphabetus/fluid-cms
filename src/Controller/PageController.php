@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Log;
 use App\Entity\Page;
+use App\Form\DeletePageType;
 use App\Form\EditPageFormType;
 use App\Form\NewPageFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -99,6 +100,7 @@ class PageController extends AbstractController
         ]);
     }
 
+
     /**
      * @param $puid
      * @param Request $request
@@ -113,6 +115,7 @@ class PageController extends AbstractController
      */
     public function edit($puid, Request $request, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {
+
         $locale = $request->getLocale();
         if (!in_array($locale, AdminController::getValidLocales())){
             $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
@@ -120,12 +123,14 @@ class PageController extends AbstractController
         }
 
         $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
+
         if (!$page) {
             $this->addFlash('error', $translator->trans('app.controller.pagecontroller.edit_error'));
             return $this->redirectToRoute("admin.pages.list");
         }
 
         $form = $this->createForm(EditPageFormType::class, $page);
+        $form_delete = $this->createForm(DeletePageType::class, $page);
 
         $form->handleRequest($request);
 
@@ -145,8 +150,19 @@ class PageController extends AbstractController
             }
         }
 
+        $form_delete->handleRequest($request);
+        if ($form_delete->isSubmitted()) {
+            //$page = $form_delete->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($page);
+            $em->flush();
+            $this->addFlash("success", $translator->trans('app.controller.pagecontroller.deletesuccess'));
+            return $this->redirectToRoute("admin.pages.list");
+        }
+
         return $this->render("page/edit.html.twig", [
             "form" => $form->createView(),
+            "form_delete" => $form_delete->createView(),
             "page" => $page
         ]);
     }

@@ -7,6 +7,7 @@ app:
       edit_error: "Page not found!"
       edit_success: "Page details edited"
       invalid_slug: "You can not have a '/admin' page. Please try again with a different url"
+      deletesuccess: "Page is succesfully deleted"
     blockController:
       editblock_nonexist: "Block Not Found"
       editblock_success: "Block Updated"
@@ -64,6 +65,7 @@ app:
     # Buttons without form
     buttons:
       view_pages: "View Pages"
+      deletepage: "Delete this page"
       create_page: "Create Page"
       add_block: "Add Block"
 
@@ -105,6 +107,11 @@ app:
           add-newblock: "Add New Block"
           add-text-block: "Add Text Block"
           add-image-block: "Add Image Block"
+
+      deletepage:
+        form-buttons:
+          delete: "Delete"
+
 
       edit_block_contents:
         labels:

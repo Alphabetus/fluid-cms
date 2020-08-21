@@ -1,4 +1,133 @@
 app:
+
+  #texts in controllers eg. addflash etc
+  controller:
+    pagecontroller:
+      createpage_success: "Seitendetails bearbeitet"
+      edit_error: "Seite nicht gefunden!"
+      edit_success: "Bearbeitung Erfolgreich !"
+    blockController:
+      editblock_nonexist: "Block nicht gefunden"
+      editblock_success: "Block Aktualisiert"
+      image_updated_ok: "Bild aktualisiert"
+
+
+
+  # backend block
+
+
   backend:
-    menu:
-      new_page: "Neue Seite"
+    # Menu block which contains the sidebar navigation
+    webpagestitles:
+      admin: "Admin"
+      settings: "Global Settings"
+      newpage: "Neue Seite erstellen"
+      viewpages: "View pages"
+      editpage: "Edit the page"
+      editblock: "Edit Block Content"
+
+    menus:
+      sidebar:
+        titles:
+          pages: "Pages"
+          settings: "Settings"
+        items:
+          newpage: "New Page"
+          viewpages: "View Pages"
+          globalsettings: "Global Settings"
+      topbar:
+        language: "language"
+
+    # headers are outside menu
+    headers:
+      globalsettings: "Global Settings"
+      createpage: "Create Page"
+      existentpages: "Existent Pages"
+      pagedetails: "Page Details"
+      editpagecontent: "Edit Page Content"
+      block_edit: "Edit block content"
+      home_page_setting: "Homepage Settings"
+      maintenance_mode: "Maintenance Mode"
+
+    # Buttons without form
+    buttons:
+      view_pages: "View Pages"
+      create_page: "Create Page"
+      add_block: "Add Block"
+
+    # Forms area
+    forms:
+      new_page_creation:
+        labels:
+          pagetitle: "Page Title"
+          pagedescription: "Page Description"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Type a page title"
+          pagedescription: "Enter a page description"
+          urlpath: "Select the url for this page"
+        checkboxes:
+          pageinNavmenu: "Page in Navigation Menu"
+          pageactive: "Pages Active"
+        form-buttons:
+          submit_createpage: "Create Page"
+
+      edit_page_metadetails:
+        labels:
+          pagetitle: "Page Title"
+          pagedescription: "Page Description"
+          urlpath: "Url Path <small>(&nbsp;<b>eg</b>: yourdomain.tld/{name-you-type-here}.html&nbsp;)</small>"
+        placeholders:
+          pagetitle: "Type a page title"
+          pagedescription: "Enter a page description"
+          urlpath: "Select the url for this page"
+        checkboxes:
+          pageinNavmenu: "Page in Navigation Menu"
+          pageactive: "Page Active"
+        form-buttons:
+          submit_updatedetails: "Update Details"
+
+
+      edit_page_contents:
+        form-buttons:
+          add-newblock: "Add New Block"
+          add-text-block: "Add Text Block"
+          add-image-block: "Add Image Block"
+
+      edit_block_contents:
+        labels:
+          content: "Edit block content"
+        placeholders:
+          content: "Type the content of this block"
+        buttons:
+          submit: "Update Block Content"
+
+      edit_image_block_contents:
+        labels:
+          file: "Select an image for the block"
+        buttons:
+          submit: "Upload Image"
+        display:
+          uploading: "uploading"
+
+      change_homepage:
+        alert: "Homepage Updated"
+
+      change_maintenance:
+        alert: "Maintenance Mode Updated"
+        options:
+          enabled: "Enabled"
+          disabled: "Disabled"
+
+    content:
+      settings:
+        disclaimer:
+          homepage: "Use this tool to select your homepage."
+          maintenance: "When this tool is enabled your website will be in maintenance mode."
+      pages:
+        not_found:
+          title: "404 Page Not Found"
+          disclaimer: "This content does not exist or it have been moved to another place."
+      blocks:
+        image-blocks:
+          title: "Selected Image"

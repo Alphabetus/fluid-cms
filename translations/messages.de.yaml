@@ -7,10 +7,13 @@ app:
       edit_error: "Seite nicht gefunden!"
       edit_success: "Bearbeitung Erfolgreich !"
       invalid_slug: "Du kannst  '/admin' Seite nicht erreichen. Bitte andere url probieren"
+      deletesuccess: "Diese seite ist erfolgreich gelöscht"
     blockController:
       editblock_nonexist: "Block nicht gefunden"
       editblock_success: "Block Aktualisiert"
       image_updated_ok: "Bild aktualisiert"
+    admincontroller:
+      locale_not_found: "Die erforderliche Sprache wird nicht unterstützt!"
 
 
 
@@ -102,6 +105,11 @@ app:
           add-newblock: "Neue Block hinzufügen"
           add-text-block: "Neue Text-Block hinzufügrn"
           add-image-block: "BildBlock hinzufügen"
+
+      deletepage:
+        form-buttons:
+          delete: "Löschen"
+
 
       edit_block_contents:
         labels:

@@ -10,7 +10,16 @@
                 <h1>{{ "app.backend.headers.pagedetails"|trans }} <small>[{{ page.title }}]</small></h1>
             </div>
             <div class="col-6 align-self-center text-right">
-                <a href="{{ path("admin.pages.list") }}" class="btn btn-sm btn-outline-primary">{{ "app.backend.buttons.view_pages"|trans }}</a>
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        <a href="{{ path("admin.pages.list") }}" class="btn btn-sm btn-outline-primary">{{ "app.backend.buttons.view_pages"|trans }}</a>
+                    </div>
+                    <div class="col-auto">
+                        {{ form_start(form_delete) }}
+                            <button type="submit" class="btn btn-sm btn-outline-danger">{{ "app.backend.forms.deletepage.form-buttons.delete"|trans }}</button>
+                        {{ form_end(form_delete) }}
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

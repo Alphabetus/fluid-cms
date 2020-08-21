@@ -25,14 +25,18 @@
                     {{ "app.backend.content.settings.disclaimer.homepage"|trans }}
                 </div>
 
-                <select name="homepage" class="custom-select" onchange="javascript:window.selectHomepage.call(this)" data-endpoint="{{ path("admin.settings.update.homepage") }}">
+                <select name="homepage" class="custom-select">
                     {% for page in pages %}
                         <option value="{{ page.puid }}" {% if current_homepage == page.puid %}selected="true"{% endif %}>{{ page.title }}</option>
                     {% endfor %}
                 </select>
-                <div id="homepageChangeAlert" class="alert alert-success d-none mt-2">
+
+                <div id="homepageChangeAlert" class="alert alert-success d-none mt-1 mb-0">
                     {{ "app.backend.forms.change_homepage.alert"|trans }}
                 </div>
+
+                <button type="submit" class="btn btn-block btn-success mt-1" onclick="javascript:window.selectHomepage.call(this)">{{ "app.backend.forms.change_homepage.button"|trans }}</button>
+
             </div>
         </div>
     </div>
@@ -50,14 +54,17 @@
                     {{ "app.backend.content.settings.disclaimer.maintenance"|trans }}
                 </div>
 
-                <select name="maintenance" class="custom-select" data-endpoint="{{ path("admin.settings.update.maintenance") }}" onchange="javascript:window.selectMaintenance.call(this)">
+                <select name="maintenance" class="custom-select">
                     <option value="0" {% if current_maintenance == 'false' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.disabled"|trans }}</option>
                     <option value="1" {% if current_maintenance == 'true' %}selected="true"{% endif %}>{{ "app.backend.forms.change_maintenance.options.enabled"|trans }}</option>
                 </select>
 
-                <div id="maintenanceChangeAlert" class="alert alert-success d-none mt-2">
+                <div id="maintenanceChangeAlert" class="alert alert-success d-none mt-1 mb-0">
                     {{ "app.backend.forms.change_maintenance.alert"|trans }}
                 </div>
+
+                <button type="submit" class="btn btn-block btn-success mt-1" onclick="javascript:window.selectMaintenance.call(this)">{{ "app.backend.forms.change_maintenance.button"|trans }}</button>
+
             </div>
         </div>
     </div>

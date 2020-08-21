@@ -12,6 +12,8 @@ app:
       editblock_nonexist: "Block nicht gefunden"
       editblock_success: "Block Aktualisiert"
       image_updated_ok: "Bild aktualisiert"
+    admincontroller:
+      locale_not_found: "Die erforderliche Sprache wird nicht unterstützt!"
 
 
 
@@ -22,7 +24,7 @@ app:
     # Menu block which contains the sidebar navigation
     webpagestitles:
       admin: "Admin"
-      settings: "Global Settings"
+      settings: "Globale Einstellungen"
       newpage: "Neue Seite erstellen"
       viewpages: "Seiten anschauen"
       editpage: "Seite Bearbeiten"
@@ -32,23 +34,23 @@ app:
       sidebar:
         titles:
           pages: "Seiten"
-          settings: "Settings"
+          settings: "Einstellungen"
         items:
           newpage: "Neue Seite"
           viewpages: "Seiten anschauen"
-          globalsettings: "Global Settings"
+          globalsettings: "Globale Einstellungen"
       topbar:
         language: "Sprache"
 
     # headers are outside menu
     headers:
-      globalsettings: "Global Settings"
+      globalsettings: "Globale Einstellungen"
       createpage: "Neue Seite erstellen"
       existentpages: "Existierende Seiten"
       pagedetails: "Seiten details"
       editpagecontent: "Seiten inhalt bearbeiten"
       block_edit: "block-inhalt bearbeiten"
-      home_page_setting: "Homepage Settings"
+      home_page_setting: "Homepage-Einstellungen"
       maintenance_mode: "Wartungsmodus"
 
     #tableheads

@@ -33,6 +33,12 @@ class PageController extends AbstractController
      */
     public function new(Request $request, ValidatorInterface $validator,TranslatorInterface $translator): Response
     {
+        $locale = $request->getLocale();
+        if (!in_array($locale, AdminController::getValidLocales())){
+            $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
+            return $this->redirectToRoute("admin", ["_locale" => "en"]);
+        }
+
         $page = new Page();
         $form = $this->createForm(NewPageFormType::class, $page);
         $form->handleRequest($request);
@@ -71,6 +77,8 @@ class PageController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param TranslatorInterface $translator
      * @return Response
      * @Route("{_locale}/admin/pages/list",
      *     name="admin.pages.list",
@@ -78,8 +86,14 @@ class PageController extends AbstractController
      *     options={"expose"=true}
      * )
      */
-    public function list(): Response
+    public function list(Request $request, TranslatorInterface $translator): Response
     {
+        $locale = $request->getLocale();
+        if (!in_array($locale, AdminController::getValidLocales())){
+            $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
+            return $this->redirectToRoute("admin", ["_locale" => "en"]);
+        }
+
         $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
         return $this->render("page/list.html.twig", [
             "pages" => $pages
@@ -101,7 +115,15 @@ class PageController extends AbstractController
      */
     public function edit($puid, Request $request, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["puid" => $puid]);
+
+        $locale = $request->getLocale();
+        if (!in_array($locale, AdminController::getValidLocales())){
+            $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
+            return $this->redirectToRoute("admin", ["_locale" => "en"]);
+        }
+
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
+
         if (!$page) {
             $this->addFlash('error', $translator->trans('app.controller.pagecontroller.edit_error'));
             return $this->redirectToRoute("admin.pages.list");

@@ -47,10 +47,23 @@ class BlogfrontController extends AbstractController
     public function root(): Response
     {
         $homepage_setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
+        $maintenanceStatus = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
         $pageRepository = $this->getDoctrine()->getRepository(Page::class);
         if ($homepage_setting == "") {
             return new Response("Configure your homepage in the Administration > Global Settings");
         }
+
+
+
+        if ($maintenanceStatus == "true"){
+
+            return $this->render("maintanence.html.twig");
+        }
+
+        // todo add if statement
+        /**
+         * if ($maintenance_mode == "true") { return twig file }
+         */
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 

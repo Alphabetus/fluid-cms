@@ -8,16 +8,16 @@
 {% block body %}
     <div class="container p-0 mt-2">
 
-        <div class="row justify-content between m-0">
+        <div class="row justify-content between m-0 mb-5">
 
             {% for block in blocks %}
-                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center mt-4 px-2">
+                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center mt-4 px-2  {% if block.type == 'image' %}text-center{% endif %}">
                     {% if block.type == 'text' %}
                         {{ block.content|raw }}
                     {% endif %}
 
                     {% if block.type == 'image' %}
-                        <img src="{{ vich_uploader_asset(block, 'image_file') }}" class="img-fluid">
+                        <img src="{{ asset('build/images/icons/loading-image.gif') }}" data-src="{{ vich_uploader_asset(block, 'image_file') }}" class="img-fluid lazy">
                     {% endif %}
                 </div>
             {% endfor %}

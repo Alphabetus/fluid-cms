@@ -43,6 +43,15 @@
         {% block body %}{% endblock %}
 
         {% block javascripts %}
+
+
+            <script type="text/javascript">
+                window.lazyLoadOptions = {};
+            </script>
+
+            <script async type="text/javascript"  src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+
+
         {% endblock %}
     </body>
 </html>

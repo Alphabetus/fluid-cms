@@ -16,7 +16,7 @@ class SettingController extends AbstractController
 {
     /**
      * @param Request $request
-     * @Route("/admin/settings/populate_defaults", name="admin.settings.populate_default")
+     * @Route("/admin/settings/populate_defaults", name="admin.settings.populate_default", options={"expose"=true})
      */
     public function populateDefaults(Request $request): Response
     {
@@ -45,7 +45,8 @@ class SettingController extends AbstractController
     /**
      * @Route("{_locale}/admin/settings",
      *     name="admin.settings",
-     *     defaults={"_locale"="en"}
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true}
      * )
      */
     public function showSettings()
@@ -61,7 +62,7 @@ class SettingController extends AbstractController
     }
 
     /**
-     * @Route("/admin/settings/update/homepage", name="admin.settings.update.homepage")
+     * @Route("/admin/settings/update/homepage", name="admin.settings.update.homepage", options={"expose"=true})
      * @param Request $request
      * @return JsonResponse
      */
@@ -79,7 +80,7 @@ class SettingController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/admin/settings/update/maintenance", name="admin.settings.update.maintenance")
+     * @Route("/admin/settings/update/maintenance", name="admin.settings.update.maintenance", options={"expose"=true})
      */
     public function updateMaintenanceMode(Request $request): JsonResponse
     {

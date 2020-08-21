@@ -129,12 +129,14 @@ app:
 
       change_homepage:
         alert: "Homepage aktualisiert"
+        button: "Homepage aktualisieren"
 
       change_maintenance:
         alert: "Wartungsmodus Aktualisiert"
         options:
           enabled: "Aktiviert"
           disabled: "Deaktiviert"
+        button: "Update-Wartungsmodus"
 
     content:
       settings:

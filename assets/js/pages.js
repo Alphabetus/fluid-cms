@@ -1,7 +1,7 @@
 
 window.selectHomepage = function() {
-    const $this = $(this);
-    const puid = $this.val();
+    const $select = $('[name="homepage"]');
+    const puid = $select.val();
     const endpoint = Routing.generate("admin.settings.update.homepage");
     const payload = { puid: puid }
 
@@ -15,8 +15,8 @@ window.selectHomepage = function() {
 }
 
 window.selectMaintenance = function() {
-    const $this = $(this);
-    const value = $this.val();
+    const $select = $("[name='maintenance']");
+    const value = $select.val();
     const endpoint = Routing.generate("admin.settings.update.maintenance");
     const payload = { maintenance: value }
 

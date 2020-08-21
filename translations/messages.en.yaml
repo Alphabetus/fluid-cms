@@ -131,12 +131,14 @@ app:
 
       change_homepage:
         alert: "Homepage Updated"
+        button: "Homepage Updated"
 
       change_maintenance:
         alert: "Maintenance Mode Updated"
         options:
           enabled: "Enabled"
           disabled: "Disabled"
+        button: "Update Maintenance Mode"
 
     content:
       settings:

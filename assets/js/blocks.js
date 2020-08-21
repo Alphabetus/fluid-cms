@@ -24,7 +24,7 @@ class Block {
         window.block.enableLoading();
 
         const $this = $(this);
-        const endpoint = $this.data('href');
+        const endpoint = Routing.generate("blocks.new");
         const type = $this.data('type');
         const page_id = $this.data('page');
         const $total_blocks = $('.block').not('.gu-mirror');
@@ -61,7 +61,7 @@ class Block {
                                 <small>type: text</small>
                             </div>
                             <div class="col-6 p-0 text-right align-self-center">
-                                <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
+                                <a href="${ Routing.generate("blocks.edit", { buid: parsedData.buid }) }" class="btn btn-outline-light btn-sm">edit content</a>
                             </div>
                         </div>
                         <div class="row m-0">
@@ -98,7 +98,7 @@ class Block {
         const $this = $(this);
         const container = $('#blocks__container');
         const $block = $this.closest('.block');
-        const endpoint = container.data('delete');
+        const endpoint = Routing.generate("blocks.delete");
         const payload = { buid: $block.attr("id") };
 
         window.block.enableLoading();
@@ -106,7 +106,7 @@ class Block {
         $block.remove();
 
         $.ajax({
-            url: endpoint,
+            url: Routing.generate("blocks.delete"),
             type: 'POST',
             data: payload,
             success: function(data) { window.block.disableLoading() },
@@ -119,7 +119,7 @@ class Block {
         const $block = $this.closest(".block");
         const value = $this.val();
         const breakpoint = new Breakpoint(value);
-        const endpoint = $('#blocks__container').data("resizemd");
+        const endpoint = Routing.generate("blocks.resize.md");
         const md_class = breakpoint.getMdClass();
         const payload = {
             breakpoint: md_class,
@@ -149,7 +149,7 @@ class Block {
         const $block = $this.closest(".block");
         const value = $this.val();
         const breakpoint = new Breakpoint(value);
-        const endpoint = $('#blocks__container').data("resizemob");
+        const endpoint = Routing.generate("blocks.resize.mob");
         const mob_class = breakpoint.getMobileClass();
         const payload = {
             breakpoint: mob_class,
@@ -227,7 +227,7 @@ class Block {
                                         <small>type: text</small>
                                     </div>
                                     <div class="col-6 p-0 text-right align-self-center">
-                                        <button type="button" class="btn btn-sm btn-outline-light text-truncate" onclick="javascript:window.block.openEditBlock.call(this)">edit content</button>
+                                        <a href="${ Routing.generate("blocks.edit", { buid: parsedData[x].buid }) }" class="btn btn-outline-light btn-sm">edit content</a>
                                     </div>
                                 </div>
                                 <div class="row m-0">
@@ -315,7 +315,7 @@ class Breakpoint {
 window.reassignPriority = function() {
     const $container = $('#blocks__container');
     const $blocks = $('.block').not('.gu-mirror');
-    const endpoint = $container.data('priority');
+    const endpoint = Routing.generate("blocks.priority");
     const priorityArray = [];
 
 

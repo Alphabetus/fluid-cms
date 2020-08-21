@@ -26,7 +26,8 @@ class PageController extends AbstractController
      * @return Response
      * @Route("{_locale}/admin/pages/new",
      *     name="admin.pages.new",
-     *     defaults={"_locale"="en"}
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true}
      * )
      */
     public function new(Request $request, ValidatorInterface $validator,TranslatorInterface $translator): Response
@@ -72,7 +73,8 @@ class PageController extends AbstractController
      * @return Response
      * @Route("{_locale}/admin/pages/list",
      *     name="admin.pages.list",
-     *     defaults={"_locale"="en"}
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true}
      * )
      */
     public function list(): Response
@@ -91,7 +93,8 @@ class PageController extends AbstractController
      * @return Response
      * @Route("{_locale}/admin/pages/edit/{puid}/",
      *     name="admin.page.edit",
-     *     defaults={"_locale"="en"}
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true}
      * )
      */
     public function edit($puid, Request $request, ValidatorInterface $validator, TranslatorInterface $translator): Response

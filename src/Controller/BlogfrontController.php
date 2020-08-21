@@ -15,7 +15,7 @@ class BlogfrontController extends AbstractController
     /**
      * @param string $slug
      * @return Response
-     * @Route("/{slug}", name="blogfront.page")
+     * @Route("/{slug}", name="blogfront.page", options={"expose"=true})
      */
     public function showPage(string $slug): Response
     {
@@ -42,7 +42,7 @@ class BlogfrontController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/", name="root")
+     * @Route("/",name="root", options={"expose"=true})
      */
     public function root(): Response
     {
@@ -67,7 +67,7 @@ class BlogfrontController extends AbstractController
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 
-        if ($page) {
+        if ($page && $page->getActive()) {
             $blocks = $page->getBlocks();
             return $this->render("blogfront/show_page.html.twig", [
                 "blocks" => $blocks,

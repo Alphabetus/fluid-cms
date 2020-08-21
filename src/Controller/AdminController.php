@@ -14,7 +14,9 @@ class AdminController extends AbstractController
     /**
      * @Route("{_locale}/admin",
      *     name="admin",
-     *     defaults={"_locale"="en"})
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true}
+     *     )
      */
     public function hq(Request $request)
     {
@@ -24,7 +26,7 @@ class AdminController extends AbstractController
     /**
      * @param Request $request
      * @return RedirectResponse
-     * @Route("/admin", name="admin.redirect")
+     * @Route("/admin", name="admin.redirect", options={"expose"=true})
      */
     public function mismatch(Request $request)
     {

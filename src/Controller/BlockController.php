@@ -23,7 +23,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/new", name="blocks.new")
+     * @Route("/blocks/new", name="blocks.new", options={"expose"=true})
      */
     public function createBlock(Request $request): JsonResponse
     {
@@ -56,7 +56,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/delete", name="blocks.delete")
+     * @Route("/blocks/delete", name="blocks.delete", options={"expose"=true})
      */
     public function removeBlock(Request $request): JsonResponse
     {
@@ -75,7 +75,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/resize/md", name="blocks.resize.md")
+     * @Route("/blocks/resize/md", name="blocks.resize.md", options={"expose"=true})
      */
     public function resizeBlockMd(Request $request): JsonResponse
     {
@@ -93,7 +93,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/resize/mobile", name="blocks.resize.mob")
+     * @Route("/blocks/resize/mobile", name="blocks.resize.mob", options={"expose"=true})
      */
     public function resizeBlockMobile(Request $request): JsonResponse
     {
@@ -111,7 +111,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/get", name="blocks.get")
+     * @Route("/blocks/get", name="blocks.get", options={"expose"=true})
      */
     public function populateBlocks(Request $request): JsonResponse
     {
@@ -134,7 +134,7 @@ class BlockController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Route("/blocks/priority", name="blocks.priority")
+     * @Route("/blocks/priority", name="blocks.priority", options={"expose"=true})
      */
     public function reassignPriority(Request $request): JsonResponse
     {
@@ -160,7 +160,7 @@ class BlockController extends AbstractController
      * @param ValidatorInterface $validator
      * @param TranslatorInterface $translator
      * @return Response
-     * @Route("/admin/blocks/edit/{buid}", name="blocks.edit")
+     * @Route("/admin/blocks/edit/{buid}", name="blocks.edit", options={"expose"=true})
      */
     public function editBlock(Request $request, string $buid, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {

@@ -50,6 +50,14 @@ app:
       home_page_setting: "Homepage Settings"
       maintenance_mode: "Wartungsmodus"
 
+    #tableheads
+    thead:
+      title: "Title"
+      description: "Beschreibung"
+      urlpath: "Url Path"
+      published: "veröffentlicht"
+      listed: "aufgelistet"
+      actions: "Aktionen"
     # Buttons without form
     buttons:
       view_pages: "Seiten anschauen"

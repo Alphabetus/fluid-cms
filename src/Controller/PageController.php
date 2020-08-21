@@ -67,7 +67,7 @@ class PageController extends AbstractController
                 Log::logEntry("Page",$page->getId(),$page->getSlug(),"created",$em);
 
                 $this->addFlash('success', $translator->trans('app.controller.pagecontroller.createpage_success'));
-                return $this->redirectToRoute("admin.pages.list");
+                return $this->redirectToRoute("admin.page.edit", ["puid" => $page->getPuid()]);
             }
         }
 

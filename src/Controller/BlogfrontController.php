@@ -67,7 +67,7 @@ class BlogfrontController extends AbstractController
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 
-        if ($page) {
+        if ($page && $page->getActive()) {
             $blocks = $page->getBlocks();
             return $this->render("blogfront/show_page.html.twig", [
                 "blocks" => $blocks,

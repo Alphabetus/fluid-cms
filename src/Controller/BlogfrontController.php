@@ -40,7 +40,10 @@ class BlogfrontController extends AbstractController
      */
     public function notFound(): Response
     {
-        return $this->render("blogfront/404.html.twig");
+        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
+        return $this->render("blogfront/404.html.twig", [
+            "nav_pages" => $nav_pages
+        ]);
     }
 
     /**

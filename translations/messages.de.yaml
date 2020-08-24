@@ -14,6 +14,8 @@ app:
       image_updated_ok: "Bild aktualisiert"
     admincontroller:
       locale_not_found: "Die erforderliche Sprache wird nicht unterstützt!"
+    authenticator:
+      login_ok: "Sie sind jetzt eingeloggt"
 
 
 
@@ -137,6 +139,9 @@ app:
           enabled: "Aktiviert"
           disabled: "Deaktiviert"
         button: "Update-Wartungsmodus"
+
+      logout_form:
+        button: "Logout"
 
     content:
       settings:

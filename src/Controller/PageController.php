@@ -61,6 +61,7 @@ class PageController extends AbstractController
                 $page = $form->getData();
                 $page->setPuid(Uuid::v1());
                 $page->setSlug($page::cleanSlug($page->getSlug()));
+                $page->setViews(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($page);
                 $em->flush();

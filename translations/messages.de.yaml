@@ -68,6 +68,7 @@ app:
       view_pages: "Seiten anschauen"
       create_page: "Seite erstellen"
       add_block: "Block hinzufügen"
+      back_to_page_editor: "Zurück zum Herausgeber"
 
     # Forms area
     forms:

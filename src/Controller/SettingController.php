@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SettingController extends AbstractController
@@ -105,6 +106,45 @@ class SettingController extends AbstractController
             "current_title" => $current_title,
             "pages" => $pages
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
+     * @Route("{_locale}/admin/security",
+     *     name="admin.security",
+     *     defaults={"_locale"="en"},
+     *     options={"expose"=true})
+     */
+    public function changePassword(Request $request)
+    {
+        return $this->render("admin/change_password.html.twig", [
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @param TranslatorInterface $translator
+     * @return JsonResponse
+     * @Route("/admin/settigns/update/password", name="admin.settings.update.password", options={"expose"=true})
+     */
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, TranslatorInterface $translator)
+    {
+        $user = $this->userRepository->findOneBy(["username" => "admin"]);
+        $password1 = $request->request->get("password");
+        $password2 = $request->request->get("confirm_password");
+        $em = $this->getDoctrine()->getManager();
+
+        if ($password1 == $password2 && strlen($password1) > 4) {
+            $user->setPassword($encoder->encodePassword($user, $password1));
+            $em->flush();
+            return new JsonResponse(true,  200);
+        } else {
+            return new JsonResponse(false, 200);
+        }
+
     }
 
     /**

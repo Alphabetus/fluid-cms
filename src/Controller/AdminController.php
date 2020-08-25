@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,17 @@ class AdminController extends AbstractController
             $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
             return $this->redirectToRoute("admin", ["_locale" => "en"]);
         }
-        return $this->render("base_admin.html.twig");
+
+        $total_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(array('active' => true));
+        $total_pages_count = count($total_pages);
+        $total_views = $this->countTotalVisits($total_pages);
+        $most_viewed_page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["active" => true], ["views" => "DESC"]);
+
+        return $this->render("admin/dashboard.html.twig", [
+            "total_pages" => $total_pages_count,
+            "total_views" => $total_views,
+            "most_viewed_page" => $most_viewed_page
+        ]);
     }
 
     /**
@@ -46,5 +57,23 @@ class AdminController extends AbstractController
     public static function getValidLocales(): array
     {
         return ["en", "de"];
+    }
+
+    public function countTotalVisits($collection): int
+    {
+        $counter = 0;
+        foreach ($collection as $page) {
+            $counter += $page->getViews();
+        }
+        return $counter;
+    }
+
+    protected function logger($content)
+    {
+        $file = "test.php";
+        ob_start();
+        var_dump($content);
+        $testing = ob_get_clean();
+        file_put_contents($file, $testing, FILE_APPEND);
     }
 }

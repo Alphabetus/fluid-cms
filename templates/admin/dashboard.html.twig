@@ -1,0 +1,60 @@
+{% extends "base_admin.html.twig" %}
+
+{% block admin_body %}
+
+    <div class="row justity-content-center">
+
+        <div class="col-6 admin__dashboard mt-2">
+            <div class="container-fluid p-0 h-100">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ "app.backend.content.dashboard.titles.total_pages"|trans }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center">{{ "app.backend.content.dashboard.subtitles.total_pages"|trans }}</h6>
+                        <p class="card-text text-center font-weight-bold">{{ total_pages }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 admin__dashboard mt-2">
+            <div class="container-fluid p-0 h-100">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ "app.backend.content.dashboard.titles.total_views"|trans }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center">{{ "app.backend.content.dashboard.subtitles.total_views"|trans }}</h6>
+                        <p class="card-text text-center font-weight-bold">{{ total_views }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-6 admin__dashboard mt-2">
+            <div class="container-fluid p-0 h-100">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ "app.backend.content.dashboard.titles.most_viewed_page"|trans }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center">{{ "app.backend.content.dashboard.subtitles.most_viewed_page"|trans }}</h6>
+                        <p class="card-text text-center font-weight-bold font-italic">'{{ most_viewed_page.title }}'</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-6 admin__dashboard mt-2">
+            <div class="container-fluid p-0 h-100">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ "app.backend.content.dashboard.titles.most_viewed_page_views"|trans }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center">{{ "app.backend.content.dashboard.subtitles.most_viewed_page_views"|trans }}</h6>
+                        <p class="card-text text-center font-weight-bold">{{ most_viewed_page.views }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

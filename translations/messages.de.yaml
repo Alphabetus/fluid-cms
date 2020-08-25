@@ -164,3 +164,11 @@ app:
       blocks:
         image-blocks:
           title: "ausgewählte Bild"
+
+      dashboard:
+        titles:
+          total_pages: "Seiten insgesamt"
+          total_views: "Gesamtseitenaufrufe"
+        subtitles:
+          total_pages: "Gesamtmenge der aktiven Seiten"
+          total_views: "Gesamtzahl der Seitenaufrufe"

@@ -74,6 +74,9 @@ class BlogfrontController extends AbstractController
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 
         if ($page && $page->getActive()) {
+            $page->setViews($page->getViews() + 1);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
             $blocks = $page->getBlocks();
             return $this->render("blogfront/show_page.html.twig", [
                 "current_title" =>  $current_title,

@@ -54,6 +54,7 @@ app:
       block_edit: "Edit block content"
       home_page_setting: "Homepage Settings"
       maintenance_mode: "Maintenance Mode"
+      website_title: "Website Title"
 
     #tableheads
     thead:
@@ -143,6 +144,11 @@ app:
           disabled: "Disabled"
         button: "Update Maintenance Mode"
 
+      change_website_title:
+        alert: "Website title was changed successfully"
+        placeholder: "Pick your website title"
+        button: "Update Title"
+
       logout_form:
         button: "Logout"
 
@@ -151,6 +157,7 @@ app:
         disclaimer:
           homepage: "Use this tool to select your homepage."
           maintenance: "When this tool is enabled your website will be in maintenance mode."
+          website_title: "Use this tool to define your website title"
       pages:
         not_found:
           title: "404 Page Not Found"

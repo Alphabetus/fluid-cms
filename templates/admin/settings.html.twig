@@ -7,7 +7,7 @@
 
     <div class="container-fluid p-0">
         <div class="row justify-content-between">
-            <div class="col-6 align-self-center-center">
+            <div class="col-12 align-self-center-center">
                 <h1>{{ "app.backend.headers.globalsettings"|trans }}</h1>
             </div>
         </div>
@@ -64,6 +64,31 @@
                 </div>
 
                 <button type="submit" class="btn btn-block btn-success mt-1" onclick="javascript:window.selectMaintenance.call(this)">{{ "app.backend.forms.change_maintenance.button"|trans }}</button>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid p-0 mt-2">
+        <div class="row justify-content-between">
+            <div class="col-12 align-self-center-center">
+                <h4>{{ "app.backend.headers.website_title"|trans }}</h4>
+            </div>
+
+            <div class="col-12">
+                <div class="alert alert-info text-xs mb-1">
+                    {{ "app.backend.content.settings.disclaimer.website_title"|trans }}
+                </div>
+
+                <input id="websiteTitle" type="text" placeholder="{{ 'app.backend.forms.change_website_title.placeholder'|trans }}" class="form-control" value="{{ current_title.value }}">
+
+                <div id="titleChangeAlert" class="alert alert-success d-none mt-1 mb-0">
+                    {{ "app.backend.forms.change_website_title.alert"|trans }}
+                </div>
+
+                <button type="submit" class="btn btn-block btn-success mt-1" onclick="javascript:window.selectTitle.call(this)">{{ "app.backend.forms.change_website_title.button"|trans }}</button>
 
             </div>
         </div>

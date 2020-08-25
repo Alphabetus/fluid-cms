@@ -54,6 +54,7 @@ app:
       block_edit: "block-inhalt bearbeiten"
       home_page_setting: "Homepage-Einstellungen"
       maintenance_mode: "Wartungsmodus"
+      website_title: "Titel der Website"
 
     #tableheads
     thead:
@@ -141,6 +142,11 @@ app:
           disabled: "Deaktiviert"
         button: "Update-Wartungsmodus"
 
+      change_website_title:
+        alert: "Website-Titel wurde erfolgreich geändert"
+        placeholder: "Wählen Sie Ihren Website-Titel"
+        button: "Titel aktualisieren"
+
       logout_form:
         button: "Logout"
 
@@ -149,6 +155,7 @@ app:
         disclaimer:
           homepage: "Verwenden Sie dieses Tool, um Ihre Homepage auszuwählen."
           maintenance: "Wenn dies Tool aktiviert - Ihre Website wird in Wartungsmodus"
+          website_title: "Verwenden Sie dieses Werkzeug, um den Titel Ihrer Website zu definieren"
       pages:
         not_found:
           title: "404 Seite nicht gefunden"

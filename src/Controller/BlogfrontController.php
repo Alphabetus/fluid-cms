@@ -25,12 +25,14 @@ class BlogfrontController extends AbstractController
         }
 
         $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
+        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
 
         $blocks = $page->getBlocks();
         return $this->render("blogfront/show_page.html.twig", [
             "nav_pages" => $nav_pages,
             "blocks" => $blocks,
-            "page" => $page
+            "page" => $page,
+            "current_title" => $current_title
         ]);
     }
 
@@ -64,12 +66,14 @@ class BlogfrontController extends AbstractController
         }
 
         $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
+        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 
         if ($page && $page->getActive()) {
             $blocks = $page->getBlocks();
             return $this->render("blogfront/show_page.html.twig", [
+                "current_title" =>  $current_title,
                 "nav_pages" => $nav_pages,
                 "blocks" => $blocks,
                 "page" => $page

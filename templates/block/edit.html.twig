@@ -9,7 +9,23 @@
     <div class="container-fluid p-0">
         <div class="row justify-content-between">
             <div class="col-12 align-self-center-center">
+                
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="container-fluid p-0">
+        <div class="row justify-content-between">
+            <div class="col-6 align-self-center-center">
                 <h2>{{ "app.backend.headers.block_edit"|trans }}</h2>
+            </div>
+            <div class="col-6 align-self-center text-right">
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        <a href="{{ path("admin.page.edit", {puid: block.page.puid}) }}" class="btn btn-sm btn-outline-primary">{{ "app.backend.buttons.back_to_page_editor"|trans }}</a>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

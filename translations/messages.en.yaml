@@ -70,6 +70,7 @@ app:
       deletepage: "Delete this page"
       create_page: "Create Page"
       add_block: "Add Block"
+      back_to_page_editor: "Back to editor"
 
     # Forms area
     forms:

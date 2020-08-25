@@ -23,7 +23,8 @@ class SettingController extends AbstractController
     {
         $default_settings = [
             "homepage" => "",
-            "maintenance" => "false"
+            "maintenance" => "false",
+            "title" => ""
         ];
 
         $existent_settings = $this->getDoctrine()->getRepository(GlobalSetting::class)->findAll();
@@ -63,9 +64,12 @@ class SettingController extends AbstractController
         $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
         $current_homepage = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
         $current_maintenance = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
+        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+
         return $this->render("admin/settings.html.twig", [
             "current_maintenance" => $current_maintenance,
             "current_homepage" => $current_homepage,
+            "current_title" => $current_title,
             "pages" => $pages
         ]);
     }
@@ -97,6 +101,22 @@ class SettingController extends AbstractController
         $value = $request->request->get('maintenance');
         if ($value == 1) { $value = "true"; } else { $value = "false"; }
         $setting->setValue($value);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new JsonResponse("ok", 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/admin/settings/update/title", name="admin.settings.update.title", options={"expose"=true})
+     */
+    public function updateTitle(Request $request)
+    {
+        $setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+        $new_title = $request->request->get('title');
+        $setting->setValue($new_title);
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 

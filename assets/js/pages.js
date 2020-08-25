@@ -29,6 +29,21 @@ window.selectMaintenance = function() {
     })
 }
 
+window.selectTitle = function() {
+    const $input = $('#websiteTitle');
+    const title = $input.val();
+    const endpoint = Routing.generate("admin.settings.update.title");
+    const payload = {title: title}
+
+    $.ajax({
+        url: endpoint,
+        type: 'POST',
+        data: payload,
+        success: function(d) { displayTitleUpdateAlert() },
+        error: function(d) {}
+    })
+}
+
 function displayHomepageChangeAlert() {
     const $alert = $('#homepageChangeAlert');
     $alert.removeClass('d-none');
@@ -38,10 +53,17 @@ function displayHomepageChangeAlert() {
 }
 
 function displayMaintenanceChangeAlert() {
-    console.log("called")
     const $alert = $('#maintenanceChangeAlert');
     $alert.removeClass("d-none");
     setTimeout(function(){
         $alert.addClass("d-none");
     }, 5000)
+}
+
+function displayTitleUpdateAlert() {
+    const $alert = $('#titleChangeAlert');
+    $alert.removeClass('d-none');
+    setTimeout(function(){
+        $alert.addClass('d-none');
+    }, 5000);
 }

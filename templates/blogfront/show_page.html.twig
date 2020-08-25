@@ -32,7 +32,7 @@
         <div class="row justify-content between m-0 mb-5">
 
             {% for block in blocks %}
-                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center mt-4 px-2  {% if block.type == 'image' %}text-center{% endif %}">
+                <div class="{{ block.mobileBreakpoint }} {{ block.desktopBreakpoint }} align-self-center mt-4 px-2  {% if block.type == 'image' %}text-center{% endif %}" style="word-wrap:break-word";>
                     {% if block.type == 'text' %}
                         {{ block.content|raw }}
                     {% endif %}

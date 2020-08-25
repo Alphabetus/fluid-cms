@@ -8,6 +8,7 @@
 1. Move into the application directory and run:
     - composer install
     - bin/console assets:install
+    - yarn add @symfony/webpack-encore --dev
     - yarn encore dev/prod
 1. Setup your .env file accordingly
 1. Run:

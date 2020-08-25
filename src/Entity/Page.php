@@ -86,6 +86,11 @@ class Page
      */
     private $blocks;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
+
     public function __construct()
     {
         $this->blocks = new ArrayCollection();
@@ -217,6 +222,18 @@ class Page
                 $block->setPage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
 
         return $this;
     }

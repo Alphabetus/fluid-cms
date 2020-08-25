@@ -5,10 +5,11 @@ namespace App\Controller;
 
 
 use App\Entity\Block;
-use App\Entity\Page;
 use App\Entity\Log;
 use App\Form\EditBlockFormType;
 use App\Form\EditBlockImageType;
+use App\Repository\BlockRepository;
+use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class BlockController extends AbstractController
 {
     /**
+     * @var PageRepository
+     */
+    private $pageRepository;
+
+    /**
+     * @var BlockRepository
+     */
+    private $blockRepository;
+
+    public function __construct(PageRepository $pageRepository, BlockRepository $blockRepository)
+    {
+        $this->pageRepository = $pageRepository;
+        $this->blockRepository = $blockRepository;
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse
      * @Route("/blocks/new", name="blocks.new", options={"expose"=true})
@@ -30,7 +47,7 @@ class BlockController extends AbstractController
         $id = $request->request->get("page_id");
         $type =  $request->request->get("type");
         $priority = $request->request->get("priority");
-        $page = $this->getDoctrine()->getRepository(Page::class)->find($id);
+        $page = $this->pageRepository->find($id);
         $block = new Block();
         $em = $this->getDoctrine()->getManager();
         $block->setPage($page);
@@ -43,8 +60,6 @@ class BlockController extends AbstractController
         $em->flush();
 
         Log::logEntry("Block",$block->getId(),$block->getType(),"created",$em);
-
-
 
         $output = [
             "buid" => $block->getBuid(),
@@ -61,7 +76,7 @@ class BlockController extends AbstractController
     public function removeBlock(Request $request): JsonResponse
     {
         $buid = $request->request->get("buid");
-        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $block = $this->blockRepository->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
         Log::logEntry("Block",$block->getId(),$block->getType(),"removed",$em);
 
@@ -81,7 +96,7 @@ class BlockController extends AbstractController
     {
         $buid = $request->request->get('buid');
         $desk_breakpoint = $request->request->get('breakpoint');
-        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $block = $this->blockRepository->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
         $block->setDesktopBreakpoint($desk_breakpoint);
         Log::logEntry("Block",$block->getId(),$block->getType(),"resized(BlockMd)",$em);
@@ -99,7 +114,7 @@ class BlockController extends AbstractController
     {
         $buid = $request->request->get('buid');
         $mob_breakpoint = $request->request->get('breakpoint');
-        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $block = $this->blockRepository->findOneBy(["buid" => $buid]);
         $em = $this->getDoctrine()->getManager();
         $block->setMobileBreakpoint($mob_breakpoint);
         Log::logEntry("Block",$block->getId(),$block->getType(),"resized(blockMobile)",$em);
@@ -116,7 +131,7 @@ class BlockController extends AbstractController
     public function populateBlocks(Request $request): JsonResponse
     {
         $puid = $request->request->get('puid');
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["puid" => $puid]);
+        $page = $this->pageRepository->findOneBy(["puid" => $puid]);
         $blocks = $page->getBlocks();
         $serializer = $this->container->get("serializer");
         $blocks = $serializer->serialize($blocks, 'json', [
@@ -140,11 +155,11 @@ class BlockController extends AbstractController
     {
         $puid = $request->request->get('puid');
         $priorityArray = $request->request->get('blocks');
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["puid" => $puid]);
+        $page = $this->pageRepository->findOneBy(["puid" => $puid]);
         $em = $this->getDoctrine()->getManager();
 
         foreach ($priorityArray as $index => $value) {
-            $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $value]);
+            $block = $this->blockRepository->findOneBy(["buid" => $value]);
             $block->setPriority($index);
             Log::logEntry("Block",$block->getId(),$block->getType(),"priority changed",$em);
 
@@ -164,7 +179,7 @@ class BlockController extends AbstractController
      */
     public function editBlock(Request $request, string $buid, ValidatorInterface $validator, TranslatorInterface $translator): Response
     {
-        $block = $this->getDoctrine()->getRepository(Block::class)->findOneBy(["buid" => $buid]);
+        $block = $this->blockRepository->findOneBy(["buid" => $buid]);
         $form = $this->createForm(EditBlockFormType::class, $block);
         $form_image = $this->createForm(EditBlockImageType::class, $block);
 

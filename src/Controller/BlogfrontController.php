@@ -3,9 +3,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Log;
-use App\Entity\GlobalSetting;
-use App\Entity\Page;
+use App\Repository\GlobalSettingRepository;
+use App\Repository\PageRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,13 +13,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlogfrontController extends AbstractController
 {
     /**
+     * @var PageRepository
+     */
+    private $pageRepository;
+    /**
+     * @var EntityManager
+     */
+    private $em;
+    /**
+     * @var GlobalSettingRepository
+     */
+    private $globalSettingRepository;
+
+    public function __construct(PageRepository $pageRepository, GlobalSettingRepository $globalSettingRepository)
+    {
+        $this->pageRepository = $pageRepository;
+        $this->globalSettingRepository = $globalSettingRepository;
+    }
+
+    /**
      * @param string $slug
      * @return Response
      * @Route("/{slug}", name="blogfront.page", options={"expose"=true})
      */
     public function showPage(string $slug): Response
     {
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["slug" => $slug]);
+        $page = $this->pageRepository->findOneBy(["slug" => $slug]);
         if (!$page) {
             return $this->redirectToRoute("blogfront.not_found");
         }
@@ -27,8 +46,8 @@ class BlogfrontController extends AbstractController
         $page->setViews($page->getViews() + 1);
         $em->flush();
 
-        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
-        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+        $nav_pages = $this->pageRepository->findBy(["active" => true]);
+        $current_title = $this->globalSettingRepository->findOneBy(["name" => "title"]);
 
         $blocks = $page->getBlocks();
         return $this->render("blogfront/show_page.html.twig", [
@@ -45,7 +64,7 @@ class BlogfrontController extends AbstractController
      */
     public function notFound(): Response
     {
-        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
+        $nav_pages = $this->pageRepository->findBy(["active" => true]);
         return $this->render("blogfront/404.html.twig", [
             "nav_pages" => $nav_pages
         ]);
@@ -57,9 +76,9 @@ class BlogfrontController extends AbstractController
      */
     public function root(): Response
     {
-        $homepage_setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
-        $maintenanceStatus = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
-        $pageRepository = $this->getDoctrine()->getRepository(Page::class);
+        $homepage_setting = $this->globalSettingRepository->findOneBy(["name" => "homepage"])->getValue();
+        $maintenanceStatus = $this->globalSettingRepository->findOneBy(["name" => "maintenance"])->getValue();
+        $pageRepository = $this->pageRepository;
         if ($homepage_setting == "") {
             return new Response("Configure your homepage in the Administration > Global Settings");
         }
@@ -68,8 +87,8 @@ class BlogfrontController extends AbstractController
             return $this->render("maintanence.html.twig");
         }
 
-        $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
-        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+        $nav_pages = $pageRepository->findBy(["active" => true]);
+        $current_title = $this->globalSettingRepository->findOneBy(["name" => "title"]);
 
         $page = $pageRepository->findOneBy(["puid" => $homepage_setting]);
 

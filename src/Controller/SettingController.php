@@ -5,8 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\GlobalSetting;
+use App\Entity\User;
 use App\Repository\GlobalSettingRepository;
 use App\Repository\PageRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,11 +26,16 @@ class SettingController extends AbstractController
      * @var PageRepository
      */
     private $pageRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
-    public function __construct(GlobalSettingRepository $globalSettingRepository, PageRepository $pageRepository)
+    public function __construct(GlobalSettingRepository $globalSettingRepository, PageRepository $pageRepository, UserRepository $userRepository)
     {
         $this->globalSettingRepository = $globalSettingRepository;
         $this->pageRepository = $pageRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -45,6 +52,16 @@ class SettingController extends AbstractController
 
         $existent_settings = $this->globalSettingRepository->findAll();
         $em = $this->getDoctrine()->getManager();
+
+        $default_admin = $this->userRepository->findOneBy(["username" => "admin"]);
+        if (!$default_admin) {
+            $user = new User();
+            $user->setUsername("admin");
+            $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$AluTsPSP+hHBwGyWlzMPrg$ipaG8C6ddAIYcZAEIXvoaWQL3vf7S+rzxwV9EHL5HeU');
+            $user->setRoles(["ROLE_ADMIN"]);
+            $em->persist($user);
+            $em->flush();
+        }
 
         if (count($existent_settings) > 0) {
             return new Response("there are already settings stored. stopping!", 200);

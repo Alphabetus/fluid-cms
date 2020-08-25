@@ -1,4 +1,21 @@
 
+window.updatePassword = function() {
+    const $this = $(this);
+    const $pass_1 = $('[name="password"]').val();
+    const $pass_2 = $('[name="confirm_password"]').val();
+    const endpoint = Routing.generate("admin.settings.update.password");
+    const payload = { password: $pass_1, confirm_password: $pass_2 }
+
+    $.ajax({
+        url: endpoint,
+        type: "POST",
+        data: payload,
+        success: function(d) { displayPasswordChangeAlert(d) },
+        error: function(d) { console.log(d) }
+    })
+
+}
+
 window.selectHomepage = function() {
     const $select = $('[name="homepage"]');
     const puid = $select.val();
@@ -66,4 +83,17 @@ function displayTitleUpdateAlert() {
     setTimeout(function(){
         $alert.addClass('d-none');
     }, 5000);
+}
+function displayPasswordChangeAlert(data) {
+    const $ok = $('#password_changed');
+    const $not_ok = $('#password_not_changed');
+
+    $ok.addClass("d-none")
+    $not_ok.addClass("d-none")
+
+    if (data == true) {
+        $ok.removeClass("d-none");
+    } else {
+        $not_ok.removeClass("d-none");
+    }
 }

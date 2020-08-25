@@ -41,12 +41,14 @@ app:
           newpage: "New Page"
           viewpages: "View Pages"
           globalsettings: "Global Settings"
+          security: "Security"
       topbar:
         language: "language"
 
     # headers are outside menu
     headers:
       globalsettings: "Global Settings"
+      securitysettings: "Change Password"
       createpage: "Create Page"
       existentpages: "Existent Pages"
       pagedetails: "Page Details"
@@ -148,6 +150,18 @@ app:
         alert: "Website title was changed successfully"
         placeholder: "Pick your website title"
         button: "Update Title"
+
+      change_password:
+        alert:
+          success: "Password updated!"
+          error: "Your passwords are invalid. Your password was not changed. Please try again"
+        placeholders:
+          password: "Insert your new password"
+          confirm_password: "Confirm your password"
+        labels:
+          password: "Password"
+          confirm_password: "Confirm Password"
+        button: "Update Password"
 
       logout_form:
         button: "Logout"

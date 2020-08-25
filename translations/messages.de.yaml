@@ -41,12 +41,14 @@ app:
           newpage: "Neue Seite"
           viewpages: "Seiten anschauen"
           globalsettings: "Globale Einstellungen"
+          security: "Sicherheit"
       topbar:
         language: "Sprache"
 
     # headers are outside menu
     headers:
       globalsettings: "Globale Einstellungen"
+      securitysettings: "Passwort ändern"
       createpage: "Neue Seite erstellen"
       existentpages: "Existierende Seiten"
       pagedetails: "Seiten details"
@@ -146,6 +148,18 @@ app:
         alert: "Website-Titel wurde erfolgreich geändert"
         placeholder: "Wählen Sie Ihren Website-Titel"
         button: "Titel aktualisieren"
+
+      change_password:
+        alert:
+          success: "Passwort aktualisiert!"
+          error: "Ihre Passwörter sind ungültig. Ihr Passwort wurde nicht geändert. Bitte versuchen Sie es erneut"
+        placeholders:
+          password: "Geben Sie Ihr neues Passwort ein"
+          confirm_password: "Bestätigen Sie Ihr Passwort"
+        labels:
+          password: "Kennworth"
+          confirm_password: "Passwort bestätigen"
+        button: "Passwort aktualisieren"
 
       logout_form:
         button: "Logout"

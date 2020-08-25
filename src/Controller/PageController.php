@@ -9,6 +9,8 @@ use App\Entity\Page;
 use App\Form\DeletePageType;
 use App\Form\EditPageFormType;
 use App\Form\NewPageFormType;
+use App\Repository\PageRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +22,20 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PageController extends AbstractController
 {
+    /**
+     * @var EntityManager
+     */
+    private $em;
+    /**
+     * @var PageRepository
+     */
+    private $pageRepository;
+
+    public function __construct(PageRepository $pageRepository)
+    {
+        $this->pageRepository = $pageRepository;
+    }
+
     /**
      * @param Request $request
      * @param ValidatorInterface $validator
@@ -95,7 +111,7 @@ class PageController extends AbstractController
             return $this->redirectToRoute("admin", ["_locale" => "en"]);
         }
 
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
+        $pages = $this->pageRepository->findAll();
         return $this->render("page/list.html.twig", [
             "pages" => $pages
         ]);
@@ -123,7 +139,7 @@ class PageController extends AbstractController
             return $this->redirectToRoute("admin", ["_locale" => "en"]);
         }
 
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneByPuid($puid);
+        $page = $this->pageRepository->findOneBy(["puid" => $puid]);
 
         if (!$page) {
             $this->addFlash('error', $translator->trans('app.controller.pagecontroller.edit_error'));
@@ -153,7 +169,6 @@ class PageController extends AbstractController
 
         $form_delete->handleRequest($request);
         if ($form_delete->isSubmitted()) {
-            //$page = $form_delete->getData();
             $em = $this->getDoctrine()->getManager();
             $em->remove($page);
             $em->flush();

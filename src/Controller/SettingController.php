@@ -5,7 +5,8 @@ namespace App\Controller;
 
 
 use App\Entity\GlobalSetting;
-use App\Entity\Page;
+use App\Repository\GlobalSettingRepository;
+use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SettingController extends AbstractController
 {
+    /**
+     * @var GlobalSettingRepository
+     */
+    private $globalSettingRepository;
+    /**
+     * @var PageRepository
+     */
+    private $pageRepository;
+
+    public function __construct(GlobalSettingRepository $globalSettingRepository, PageRepository $pageRepository)
+    {
+        $this->globalSettingRepository = $globalSettingRepository;
+        $this->pageRepository = $pageRepository;
+    }
+
     /**
      * @param Request $request
      * @Route("/admin/settings/populate_defaults", name="admin.settings.populate_default", options={"expose"=true})
@@ -27,7 +43,7 @@ class SettingController extends AbstractController
             "title" => ""
         ];
 
-        $existent_settings = $this->getDoctrine()->getRepository(GlobalSetting::class)->findAll();
+        $existent_settings = $this->globalSettingRepository->findAll();
         $em = $this->getDoctrine()->getManager();
 
         if (count($existent_settings) > 0) {
@@ -61,10 +77,10 @@ class SettingController extends AbstractController
             $this->addFlash("error", $translator->trans("app.controller.admincontroller.locale_not_found"));
             return $this->redirectToRoute("admin", ["_locale" => "en"]);
         }
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findAll();
-        $current_homepage = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"])->getValue();
-        $current_maintenance = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"])->getValue();
-        $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+        $pages = $this->pageRepository->findAll();
+        $current_homepage = $this->globalSettingRepository->findOneBy(["name" => "homepage"])->getValue();
+        $current_maintenance = $this->globalSettingRepository->findOneBy(["name" => "maintenance"])->getValue();
+        $current_title = $this->globalSettingRepository->findOneBy(["name" => "title"]);
 
         return $this->render("admin/settings.html.twig", [
             "current_maintenance" => $current_maintenance,
@@ -81,7 +97,7 @@ class SettingController extends AbstractController
      */
     public function updateHomepage(Request $request): JsonResponse
     {
-        $setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "homepage"]);
+        $setting = $this->globalSettingRepository->findOneBy(["name" => "homepage"]);
         $puid = $request->request->get("puid");
         $em = $this->getDoctrine()->getManager();
         $setting->setValue($puid);
@@ -97,7 +113,7 @@ class SettingController extends AbstractController
      */
     public function updateMaintenanceMode(Request $request): JsonResponse
     {
-        $setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "maintenance"]);
+        $setting = $this->globalSettingRepository->findOneBy(["name" => "maintenance"]);
         $value = $request->request->get('maintenance');
         if ($value == 1) { $value = "true"; } else { $value = "false"; }
         $setting->setValue($value);
@@ -114,7 +130,7 @@ class SettingController extends AbstractController
      */
     public function updateTitle(Request $request)
     {
-        $setting = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);
+        $setting = $this->globalSettingRepository->findOneBy(["name" => "title"]);
         $new_title = $request->request->get('title');
         $setting->setValue($new_title);
         $em = $this->getDoctrine()->getManager();

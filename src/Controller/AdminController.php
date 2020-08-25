@@ -4,7 +4,8 @@
 namespace App\Controller;
 
 
-use App\Entity\Page;
+use App\Repository\PageRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AdminController extends AbstractController
 {
+
+    /**
+     * @var PageRepository|ObjectRepository
+     */
+    private $pageRepository;
+
+    public function __construct(PageRepository $pageRepository)
+    {
+        $this->pageRepository = $pageRepository;
+    }
+
     /**
      * @Route("{_locale}/admin",
      *     name="admin",
@@ -32,10 +44,10 @@ class AdminController extends AbstractController
             return $this->redirectToRoute("admin", ["_locale" => "en"]);
         }
 
-        $total_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(array('active' => true));
+        $total_pages = $this->pageRepository->findBy(array('active' => true));
         $total_pages_count = count($total_pages);
         $total_views = $this->countTotalVisits($total_pages);
-        $most_viewed_page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(["active" => true], ["views" => "DESC"]);
+        $most_viewed_page = $this->pageRepository->findOneBy(["active" => true], ["views" => "DESC"]);
 
         return $this->render("admin/dashboard.html.twig", [
             "total_pages" => $total_pages_count,
@@ -66,14 +78,5 @@ class AdminController extends AbstractController
             $counter += $page->getViews();
         }
         return $counter;
-    }
-
-    protected function logger($content)
-    {
-        $file = "test.php";
-        ob_start();
-        var_dump($content);
-        $testing = ob_get_clean();
-        file_put_contents($file, $testing, FILE_APPEND);
     }
 }

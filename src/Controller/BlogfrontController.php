@@ -23,6 +23,9 @@ class BlogfrontController extends AbstractController
         if (!$page) {
             return $this->redirectToRoute("blogfront.not_found");
         }
+        $em = $this->getDoctrine()->getManager();
+        $page->setViews($page->getViews() + 1);
+        $em->flush();
 
         $nav_pages = $this->getDoctrine()->getRepository(Page::class)->findBy(["active" => true]);
         $current_title = $this->getDoctrine()->getRepository(GlobalSetting::class)->findOneBy(["name" => "title"]);

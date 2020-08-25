@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div id="blocks" class="custom-shadow-inset border border-primary p-2 mb-5 row m-0">
+    <div id="blocks" class="custom-shadow-inset border border-primary p-2 mb-5 row m-0 position-relative">
     </div>
 </div>
 
@@ -42,7 +42,10 @@
             error: function(data) { console.log(data) }
         })
 
-        window.drake = dragula([document.getElementById("blocks")]);
+        window.drake = dragula({
+            containers: [document.getElementById("blocks")],
+            mirrorContainer: document.getElementById("blocks")
+        });
 
         window.drake.on('drop', function(el, target, source, sibling){
             window.reassignPriority();

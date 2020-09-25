@@ -31,12 +31,18 @@ class SettingController extends AbstractController
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
 
-    public function __construct(GlobalSettingRepository $globalSettingRepository, PageRepository $pageRepository, UserRepository $userRepository)
+
+    public function __construct(GlobalSettingRepository $globalSettingRepository, PageRepository $pageRepository, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->globalSettingRepository = $globalSettingRepository;
         $this->pageRepository = $pageRepository;
         $this->userRepository = $userRepository;
+        $this->encoder = $passwordEncoder;
     }
 
     /**
@@ -58,7 +64,7 @@ class SettingController extends AbstractController
         if (!$default_admin) {
             $user = new User();
             $user->setUsername("admin");
-            $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$AluTsPSP+hHBwGyWlzMPrg$ipaG8C6ddAIYcZAEIXvoaWQL3vf7S+rzxwV9EHL5HeU');
+            $user->setPassword($this->encoder->encodePassword($user, "fluid"));
             $user->setRoles(["ROLE_ADMIN"]);
             $em->persist($user);
             $em->flush();

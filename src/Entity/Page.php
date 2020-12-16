@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\BlogfrontController;
 use App\Repository\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="{{ value }} is already being used as page title"
  * )
  */
-class Page
+class Page extends BlogfrontController
 {
     /**
      * STATIC METHODS

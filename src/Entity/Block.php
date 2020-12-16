@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Page;
 use App\Repository\BlockRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -11,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=BlockRepository::class)
  * @Vich\Uploadable()
  */
-class Block
+class Block extends Page
 {
     /**
      * @ORM\Id()
